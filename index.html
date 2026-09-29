@@ -14,17 +14,14 @@
   *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
   html,body{height:100%;overflow:hidden;overscroll-behavior:none}
   body{background:#fff;color:#0f172a;display:flex;flex-direction:column;user-select:none}
-
-  /* ===== TOPBAR ===== */
   .topbar{background:linear-gradient(135deg,#06b6d4 0%,#0ea5e9 100%);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px;flex-shrink:0;box-shadow:0 3px 14px rgba(6,182,212,.28)}
-  .logo{font-weight:900;font-size:18px;letter-spacing:-.3px;flex-shrink:0;display:flex;align-items:center;gap:6px}
+  .logo{font-weight:900;font-size:18px;letter-spacing:-.3px;flex-shrink:0;display:flex;align-items:center;gap:6px;cursor:pointer;-webkit-user-select:none;user-select:none}
   .logo .snake{font-size:22px;transform:scaleX(-1)}
   .pills{flex:1;display:flex;justify-content:center;gap:6px;min-width:0}
   .pill{background:rgba(255,255,255,.22);padding:5px 10px;border-radius:30px;font-weight:800;font-size:12px;white-space:nowrap;backdrop-filter:blur(6px)}
   .iconbtn{background:rgba(255,255,255,.18);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:.15s}
   .iconbtn:active{background:rgba(255,255,255,.4);transform:scale(.92)}
-
-  /* ===== HOME ===== */
+  .iconbtn.hidden{display:none}
   .main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(env(safe-area-inset-bottom) + 30px)}
   .hero{padding:18px 22px 16px;display:flex;align-items:center;gap:14px;background:linear-gradient(180deg,#ecfeff 0%,#ffffff 100%);border-bottom:1px solid #e0f7fa}
   .hero-flag{font-size:44px}
@@ -33,7 +30,6 @@
   .hero-xp{margin-left:auto;text-align:right}
   .hero-xp .big{font-size:26px;font-weight:900;color:#06b6d4}
   .hero-xp .lbl{font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:1px}
-
   .lessons{padding:16px 18px 10px;display:flex;flex-direction:column;gap:10px}
   .lesson-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid #e0f7fa;border-bottom-width:4px;border-radius:18px;background:#fff;cursor:pointer;transition:.12s;text-align:left;font-family:inherit;width:100%}
   .lesson-card:hover{background:#f0fdff;border-color:#a5f3fc}
@@ -47,8 +43,6 @@
   .lesson-info h3{font-size:16px;font-weight:800;color:#0f172a;margin-bottom:2px}
   .lesson-info p{color:#64748b;font-size:12px;font-weight:600}
   .lesson-arrow{color:#94a3b8;font-size:20px;font-weight:700}
-
-  /* ===== LESSON ===== */
   .lesson-view{display:none;flex-direction:column;flex:1;padding:14px 20px calc(env(safe-area-inset-bottom) + 18px);overflow:hidden}
   .lesson-view.active{display:flex;animation:slidein .25s ease}
   @keyframes slidein{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
@@ -57,18 +51,14 @@
   .close-btn:hover{color:#475569}
   .prog-bg{flex:1;height:14px;background:#e2e8f0;border-radius:20px;overflow:hidden}
   .prog-fill{height:100%;background:linear-gradient(90deg,#06b6d4,#0ea5e9);border-radius:20px;transition:width .4s ease;width:0}
-  .hearts{font-weight:900;color:#ef4444;font-size:15px;flex-shrink:0}
-
   .question-card{flex:1;display:flex;flex-direction:column;overflow:hidden;animation:fadein .25s ease}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   .question{font-size:22px;font-weight:800;margin-bottom:22px;line-height:1.3;color:#0f172a}
   .question.small{font-size:19px}
-
   .speaker-row{display:flex;justify-content:center;margin-bottom:22px}
   .speaker-btn{width:110px;height:110px;border-radius:50%;border:none;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;font-size:48px;cursor:pointer;box-shadow:0 7px 0 #0891b2;font-family:inherit;transition:.08s}
   .speaker-btn:hover{filter:brightness(1.06)}
   .speaker-btn:active{transform:translateY(4px);box-shadow:0 3px 0 #0891b2}
-
   .options{display:flex;flex-direction:column;gap:12px;overflow-y:auto;flex:1;padding-bottom:6px}
   .option{padding:18px 20px;border:2px solid #e2e8f0;border-bottom-width:5px;border-radius:16px;font-size:17px;font-weight:700;color:#0f172a;cursor:pointer;background:#fff;text-align:left;font-family:inherit;transition:.12s}
   .option:hover{background:#f8fafc;border-color:#cbd5e1}
@@ -77,11 +67,9 @@
   .option.correct{border-color:#22c55e;background:#f0fdf4;color:#15803d}
   .option.wrong{border-color:#ef4444;background:#fef2f2;color:#b91c1c}
   .option.disabled{pointer-events:none}
-
   .loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#64748b;font-weight:700}
   .loading-spinner{width:52px;height:52px;border-radius:50%;border:4px solid #e2e8f0;border-top-color:#06b6d4;animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-
   .footer{margin-top:auto;padding-top:16px;display:flex;justify-content:flex-end;align-items:center;gap:16px;border-top:2px solid #f1f5f9;flex-shrink:0}
   .feedback{font-weight:900;font-size:17px;margin-right:auto}
   .feedback.ok{color:#22c55e}
@@ -91,11 +79,8 @@
   .btn:disabled{background:#e2e8f0;color:#94a3b8;box-shadow:none;cursor:not-allowed}
   .btn.wrong{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 5px 0 #991b1b}
   .btn.correct{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 5px 0 #15803d}
-
   @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-12px)}40%{transform:translateX(12px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
   .shake{animation:shake .45s}
-
-  /* ===== DICTIONARY ===== */
   .dict{display:none;flex-direction:column;flex:1;padding:18px 22px calc(env(safe-area-inset-bottom) + 20px);overflow:hidden}
   .dict.active{display:flex}
   .dict h1{font-size:26px;font-weight:900;margin-bottom:4px}
@@ -112,8 +97,6 @@
   .dict-en{font-size:15px;font-weight:800;flex:1;color:#0f172a}
   .dict-uk{font-size:14px;font-weight:600;color:#64748b;flex:1;text-align:right}
   .dict-badge{font-size:10px;font-weight:800;letter-spacing:.5px;background:#ecfeff;color:#0891b2;padding:3px 7px;border-radius:8px;margin-left:6px}
-
-  /* ===== COMPLETE ===== */
   .complete{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:40px 24px;gap:8px;animation:fadein .35s ease}
   .complete.active{display:flex}
   .complete .emoji{font-size:64px;margin-bottom:6px}
@@ -121,8 +104,6 @@
   .complete p{font-size:15px;color:#64748b;font-weight:600}
   .complete .stats{display:flex;gap:20px;margin:22px 0 26px;font-weight:800;color:#475569;font-size:15px}
   .complete .stats span{display:flex;align-items:center;gap:6px}
-
-  /* ===== SETTINGS ===== */
   .settings{display:none;position:absolute;inset:0;background:rgba(15,23,42,.5);z-index:50;align-items:center;justify-content:center;padding:20px;animation:fadein .2s ease}
   .settings.active{display:flex}
   .settings-panel{background:#fff;border-radius:22px;padding:24px;width:100%;max-width:340px;max-height:80vh;overflow-y:auto;animation:slideup .25s ease}
@@ -134,17 +115,36 @@
   .settings-panel .close{width:100%;padding:15px;margin-top:20px;border:none;border-radius:14px;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;font-weight:900;font-size:14px;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 0 #0891b2;font-family:inherit}
   .settings-panel .close:active{transform:translateY(2px);box-shadow:0 2px 0 #0891b2}
   .settings-panel .note{font-size:11px;color:#94a3b8;margin-top:12px;line-height:1.5}
+  .dev-panel{background:#fff;border-radius:22px;padding:24px;width:100%;max-width:360px;max-height:85vh;overflow-y:auto;animation:slideup .25s ease}
+  .dev-panel h2{font-size:20px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .dev-panel .sub{font-size:12px;color:#94a3b8;font-weight:600;margin-bottom:16px}
+  .dev-panel label{display:block;font-size:11px;font-weight:800;color:#94a3b8;letter-spacing:1px;margin:14px 0 6px}
+  .dev-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .dev-chip{padding:10px 16px;border:2px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:.1s}
+  .dev-chip:hover{border-color:#06b6d4;background:#ecfeff;color:#0891b2}
+  .dev-chip:active{transform:translateY(2px)}
+  .dev-input{flex:1;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;font-weight:700;color:#0f172a;font-family:inherit;outline:none;min-width:0}
+  .dev-input:focus{border-color:#06b6d4}
+  .dev-btn{width:100%;padding:14px;margin-top:8px;border:none;border-radius:14px;font-weight:900;font-size:14px;letter-spacing:1px;cursor:pointer;font-family:inherit;transition:.08s}
+  .dev-btn.primary{background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;box-shadow:0 4px 0 #0891b2}
+  .dev-btn.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #0891b2}
+  .dev-btn.danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;box-shadow:0 4px 0 #991b1b}
+  .dev-btn.danger:active{transform:translateY(2px);box-shadow:0 2px 0 #991b1b}
+  .dev-btn.ghost{background:#fff;color:#64748b;border:2px solid #e2e8f0}
+  .dev-btn.ghost:active{background:#f1f5f9}
+  .dev-status{font-size:12px;font-weight:700;color:#22c55e;text-align:center;margin-top:10px;min-height:16px}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="logo"><span class="snake">🐍</span> Learny</div>
+  <div class="logo" id="logoBtn"><span class="snake">🐍</span> Learny</div>
   <div class="pills">
     <div class="pill">🔥 <span id="streakVal">1</span></div>
     <div class="pill">💎 <span id="gemVal">50</span></div>
     <div class="pill">⚡ <span id="xpVal">0</span></div>
   </div>
+  <button class="iconbtn hidden" id="devBtn" onclick="openDevPanel()">🔧</button>
   <button class="iconbtn" onclick="toggleSettings()">⚙️</button>
 </div>
 
@@ -167,7 +167,6 @@
   <div class="lesson-top">
     <button class="close-btn" onclick="exitLesson()">✕</button>
     <div class="prog-bg"><div class="prog-fill" id="lessonProgress"></div></div>
-    <div class="hearts" id="heartsLive">❤️ 5</div>
   </div>
   <div class="question-card" id="questionArea"></div>
   <div class="footer">
@@ -213,168 +212,75 @@
   </div>
 </div>
 
-<!-- PART_B -->
- <script>
-/* ============================================================
-   Learny — online-only English learning app
-   Translation: MyMemory (free, no key) + localStorage cache
-   Voice: Samantha (EN) + Lesya (UK) via device TTS
-   ============================================================ */
+<div class="settings" id="devModal" onclick="if(event.target===this)closeDevPanel()">
+  <div class="dev-panel">
+    <h2>🔧 Dev Tools</h2>
+    <div class="sub">Тільки для розробника</div>
+    <label>РОЗБЛОКУВАТИ ДО УРОКУ</label>
+    <div class="dev-row" id="unlockChips"></div>
+    <div class="dev-row">
+      <input class="dev-input" id="customUnlock" type="number" min="0" max="25" placeholder="Свій номер">
+      <button class="dev-chip" onclick="customUnlockClick()">OK</button>
+    </div>
+    <button class="dev-btn danger" onclick="devReset()">СКИНУТИ ПРОГРЕС</button>
+    <button class="dev-btn ghost" onclick="lockDev()">ЗАКРИТИ DEV</button>
+    <div class="dev-status" id="devStatus"></div>
+  </div>
+</div>
 
-/* ===== UI TRANSLATIONS ===== */
+<script>
 var UI = {
-  uk: {
-    lessons:'уроків', check:'ПЕРЕВІРИТИ', cont:'ПРОДОВЖИТИ',
-    correct:'✅ Правильно!', wrong:'❌ Не зовсім', complete:'Урок завершено!',
-    locked:'Заблоковано', completed:'Пройдено', questions:'питань',
-    loading:'Завантаження перекладів...', loadingShort:'Хвилинку...',
-    emptyDict:'Нічого не знайдено', dictHint:'Введіть слово англійською або українською',
-    dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі'
-  },
-  en: {
-    lessons:'lessons', check:'CHECK', cont:'CONTINUE',
-    correct:'✅ Correct!', wrong:'❌ Not quite', complete:'Lesson complete!',
-    locked:'Locked', completed:'Completed', questions:'questions',
-    loading:'Loading translations...', loadingShort:'One moment...',
-    emptyDict:'Nothing found', dictHint:'Type a word in English or Ukrainian',
-    dictOnline:'online translation', dictCache:'from cache', dictError:'Network error'
-  }
+  uk: { lessons:'уроків', check:'ПЕРЕВІРИТИ', cont:'ПРОДОВЖИТИ',
+        correct:'✅ Правильно!', wrong:'❌ Не зовсім', complete:'Урок завершено!',
+        locked:'Заблоковано', completed:'Пройдено', questions:'питань',
+        loading:'Завантаження перекладів...', loadingShort:'Хвилинку...',
+        emptyDict:'Нічого не знайдено', dictHint:'Введіть слово англійською або українською',
+        dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі' },
+  en: { lessons:'lessons', check:'CHECK', cont:'CONTINUE',
+        correct:'✅ Correct!', wrong:'❌ Not quite', complete:'Lesson complete!',
+        locked:'Locked', completed:'Completed', questions:'questions',
+        loading:'Loading translations...', loadingShort:'One moment...',
+        emptyDict:'Nothing found', dictHint:'Type a word in English or Ukrainian',
+        dictOnline:'online translation', dictCache:'from cache', dictError:'Network error' }
 };
 
-/* ============================================================
-   25 THEMES · 15 words each = 375 words total
-   Each theme: English word list → translated live via API
-   ============================================================ */
 var THEMES = [
-  { uk:'Привітання',  en:'Greetings',  icon:'👋', words:[
-    'hello','hi','good morning','good afternoon','good evening','good night',
-    'goodbye','bye','see you','see you later','welcome','thank you','please',
-    'sorry','excuse me'
-  ]},
-  { uk:'Знайомство',  en:'Introductions',  icon:'🤝', words:[
-    'my name is','what is your name','nice to meet you','how are you',
-    'I am fine','where are you from','I am from Ukraine','I live in',
-    'how old are you','I am','this is','my friend','my family','I speak',
-    'I do not understand'
-  ]},
-  { uk:'Числа',  en:'Numbers',  icon:'🔢', words:[
-    'one','two','three','four','five','six','seven','eight','nine','ten',
-    'eleven','twelve','thirteen','twenty','one hundred'
-  ]},
-  { uk:'Кольори',  en:'Colors',  icon:'🎨', words:[
-    'red','blue','green','yellow','orange','purple','pink','brown','black',
-    'white','grey','light','dark','bright','color'
-  ]},
-  { uk:'Тварини',  en:'Animals',  icon:'🐶', words:[
-    'cat','dog','bird','fish','horse','cow','pig','chicken','sheep','rabbit',
-    'mouse','bear','lion','elephant','animal'
-  ]},
-  { uk:'Сім\'я',  en:'Family',  icon:'👨‍👩‍👧', words:[
-    'mother','father','mom','dad','son','daughter','brother','sister',
-    'grandmother','grandfather','uncle','aunt','cousin','family','parents'
-  ]},
-  { uk:'Їжа',  en:'Food',  icon:'🍽️', words:[
-    'bread','cheese','meat','fish','egg','soup','rice','pasta','salad',
-    'butter','sugar','salt','cake','chocolate','food'
-  ]},
-  { uk:'Напої',  en:'Drinks',  icon:'🥤', words:[
-    'water','milk','tea','coffee','juice','wine','beer','soda','hot chocolate',
-    'lemonade','cup','glass','bottle','drink','thirsty'
-  ]},
-  { uk:'Фрукти й овочі',  en:'Fruits & Veggies',  icon:'🍎', words:[
-    'apple','banana','orange','lemon','strawberry','grape','peach','pear',
-    'potato','tomato','carrot','onion','cucumber','cabbage','vegetable'
-  ]},
-  { uk:'Час',  en:'Time',  icon:'🕐', words:[
-    'what time is it','hour','minute','second','morning','afternoon','evening',
-    'night','today','tomorrow','yesterday','now','later','soon','always'
-  ]},
-  { uk:'Дні тижня',  en:'Days of Week',  icon:'📅', words:[
-    'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',
-    'week','weekend','day','weekday','next week','last week','every day','daily'
-  ]},
-  { uk:'Місяці',  en:'Months',  icon:'🗓️', words:[
-    'January','February','March','April','May','June','July','August',
-    'September','October','November','December','month','year','season'
-  ]},
-  { uk:'Погода',  en:'Weather',  icon:'⛅', words:[
-    'sun','rain','snow','wind','cloud','storm','hot','cold','warm','cool',
-    'sunny','rainy','snowy','weather','temperature'
-  ]},
-  { uk:'Одяг',  en:'Clothes',  icon:'👕', words:[
-    'shirt','pants','dress','skirt','shoes','boots','hat','coat','jacket',
-    'sweater','socks','gloves','scarf','belt','clothes'
-  ]},
-  { uk:'Тіло',  en:'Body',  icon:'🧍', words:[
-    'head','hair','face','eye','ear','nose','mouth','tooth','hand','arm',
-    'leg','foot','finger','heart','body'
-  ]},
-  { uk:'Дім',  en:'House',  icon:'🏠', words:[
-    'house','home','room','kitchen','bedroom','bathroom','living room','door',
-    'window','floor','wall','roof','garden','garage','apartment'
-  ]},
-  { uk:'Меблі',  en:'Furniture',  icon:'🪑', words:[
-    'table','chair','bed','sofa','shelf','lamp','mirror','desk','cupboard',
-    'carpet','curtain','pillow','blanket','drawer','furniture'
-  ]},
-  { uk:'Місто',  en:'City',  icon:'🏙️', words:[
-    'city','town','village','street','road','square','shop','market','school',
-    'hospital','bank','park','restaurant','cafe','church'
-  ]},
-  { uk:'Транспорт',  en:'Transport',  icon:'🚗', words:[
-    'car','bus','train','plane','bike','taxi','ship','boat','motorcycle',
-    'tram','ticket','station','airport','driver','travel'
-  ]},
-  { uk:'Професії',  en:'Jobs',  icon:'👷', words:[
-    'teacher','doctor','nurse','driver','cook','waiter','police officer',
-    'farmer','engineer','lawyer','singer','artist','writer','worker','job'
-  ]},
-  { uk:'Дієслова',  en:'Basic Verbs',  icon:'🏃', words:[
-    'eat','drink','sleep','go','come','see','look','hear','speak','say',
-    'read','write','work','play','live'
-  ]},
-  { uk:'Прикметники',  en:'Adjectives',  icon:'✨', words:[
-    'big','small','good','bad','new','old','beautiful','ugly','fast','slow',
-    'easy','hard','happy','sad','important'
-  ]},
-  { uk:'Емоції',  en:'Feelings',  icon:'😊', words:[
-    'happy','sad','angry','tired','hungry','thirsty','scared','excited',
-    'surprised','bored','love','hate','like','feel','feeling'
-  ]},
-  { uk:'Здоров\'я',  en:'Health',  icon:'💊', words:[
-    'health','doctor','medicine','pain','headache','stomachache','fever',
-    'cough','cold','sick','healthy','hospital','pharmacy','rest','tired'
-  ]},
-  { uk:'Подорожі',  en:'Travel',  icon:'✈️', words:[
-    'travel','trip','journey','ticket','passport','luggage','hotel','beach',
-    'mountain','sea','map','tourist','country','city','visit'
-  ]}
+  { uk:'Привітання',  en:'Greetings',  icon:'👋', words:['hello','hi','good morning','good afternoon','good evening','good night','goodbye','bye','see you','see you later','welcome','thank you','please','sorry','excuse me'] },
+  { uk:'Знайомство',  en:'Introductions',  icon:'🤝', words:['my name is','what is your name','nice to meet you','how are you','I am fine','where are you from','I am from Ukraine','I live in','how old are you','I am','this is','my friend','my family','I speak','I do not understand'] },
+  { uk:'Числа',  en:'Numbers',  icon:'🔢', words:['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','twenty','one hundred'] },
+  { uk:'Кольори',  en:'Colors',  icon:'🎨', words:['red','blue','green','yellow','orange','purple','pink','brown','black','white','grey','light','dark','bright','color'] },
+  { uk:'Тварини',  en:'Animals',  icon:'🐶', words:['cat','dog','bird','fish','horse','cow','pig','chicken','sheep','rabbit','mouse','bear','lion','elephant','animal'] },
+  { uk:'Сім\'я',  en:'Family',  icon:'👨‍👩‍👧', words:['mother','father','mom','dad','son','daughter','brother','sister','grandmother','grandfather','uncle','aunt','cousin','family','parents'] },
+  { uk:'Їжа',  en:'Food',  icon:'🍽️', words:['bread','cheese','meat','fish','egg','soup','rice','pasta','salad','butter','sugar','salt','cake','chocolate','food'] },
+  { uk:'Напої',  en:'Drinks',  icon:'🥤', words:['water','milk','tea','coffee','juice','wine','beer','soda','hot chocolate','lemonade','cup','glass','bottle','drink','thirsty'] },
+  { uk:'Фрукти й овочі',  en:'Fruits & Veggies',  icon:'🍎', words:['apple','banana','orange','lemon','strawberry','grape','peach','pear','potato','tomato','carrot','onion','cucumber','cabbage','vegetable'] },
+  { uk:'Час',  en:'Time',  icon:'🕐', words:['what time is it','hour','minute','second','morning','afternoon','evening','night','today','tomorrow','yesterday','now','later','soon','always'] },
+  { uk:'Дні тижня',  en:'Days of Week',  icon:'📅', words:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','week','weekend','day','weekday','next week','last week','every day','daily'] },
+  { uk:'Місяці',  en:'Months',  icon:'🗓️', words:['January','February','March','April','May','June','July','August','September','October','November','December','month','year','season'] },
+  { uk:'Погода',  en:'Weather',  icon:'⛅', words:['sun','rain','snow','wind','cloud','storm','hot','cold','warm','cool','sunny','rainy','snowy','weather','temperature'] },
+  { uk:'Одяг',  en:'Clothes',  icon:'👕', words:['shirt','pants','dress','skirt','shoes','boots','hat','coat','jacket','sweater','socks','gloves','scarf','belt','clothes'] },
+  { uk:'Тіло',  en:'Body',  icon:'🧍', words:['head','hair','face','eye','ear','nose','mouth','tooth','hand','arm','leg','foot','finger','heart','body'] },
+  { uk:'Дім',  en:'House',  icon:'🏠', words:['house','home','room','kitchen','bedroom','bathroom','living room','door','window','floor','wall','roof','garden','garage','apartment'] },
+  { uk:'Меблі',  en:'Furniture',  icon:'🪑', words:['table','chair','bed','sofa','shelf','lamp','mirror','desk','cupboard','carpet','curtain','pillow','blanket','drawer','furniture'] },
+  { uk:'Місто',  en:'City',  icon:'🏙️', words:['city','town','village','street','road','square','shop','market','school','hospital','bank','park','restaurant','cafe','church'] },
+  { uk:'Транспорт',  en:'Transport',  icon:'🚗', words:['car','bus','train','plane','bike','taxi','ship','boat','motorcycle','tram','ticket','station','airport','driver','travel'] },
+  { uk:'Професії',  en:'Jobs',  icon:'👷', words:['teacher','doctor','nurse','driver','cook','waiter','police officer','farmer','engineer','lawyer','singer','artist','writer','worker','job'] },
+  { uk:'Дієслова',  en:'Basic Verbs',  icon:'🏃', words:['eat','drink','sleep','go','come','see','look','hear','speak','say','read','write','work','play','live'] },
+  { uk:'Прикметники',  en:'Adjectives',  icon:'✨', words:['big','small','good','bad','new','old','beautiful','ugly','fast','slow','easy','hard','happy','sad','important'] },
+  { uk:'Емоції',  en:'Feelings',  icon:'😊', words:['happy','sad','angry','tired','hungry','thirsty','scared','excited','surprised','bored','love','hate','like','feel','feeling'] },
+  { uk:'Здоров\'я',  en:'Health',  icon:'💊', words:['health','doctor','medicine','pain','headache','stomachache','fever','cough','cold','sick','healthy','hospital','pharmacy','rest','tired'] },
+  { uk:'Подорожі',  en:'Travel',  icon:'✈️', words:['travel','trip','journey','ticket','passport','luggage','hotel','beach','mountain','sea','map','tourist','country','city','visit'] }
 ];
 
-/* ============================================================
-   TRANSLATION via MyMemory + local cache
-   ============================================================ */
 var CACHE_KEY = 'learny_cache_v1';
 var transCache = {};
-
-function loadCache(){
-  try {
-    var raw = localStorage.getItem(CACHE_KEY);
-    if(raw) transCache = JSON.parse(raw);
-  } catch(e){ transCache = {}; }
-}
-function saveCache(){
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify(transCache)); } catch(e){}
-}
+function loadCache(){ try{ var r=localStorage.getItem(CACHE_KEY); if(r) transCache=JSON.parse(r); }catch(e){ transCache={}; } }
+function saveCache(){ try{ localStorage.setItem(CACHE_KEY, JSON.stringify(transCache)); }catch(e){} }
 
 function translate(text, from, to, callback){
   var key = from + '|' + to + '|' + text.toLowerCase();
-  if(transCache[key]){
-    callback(transCache[key], true);
-    return;
-  }
-  var url = 'https://api.mymemory.translated.net/get?q=' +
-            encodeURIComponent(text) + '&langpair=' + from + '|' + to;
+  if(transCache[key]){ callback(transCache[key], true); return; }
+  var url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to;
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.timeout = 8000;
@@ -383,13 +289,7 @@ function translate(text, from, to, callback){
       try {
         var r = JSON.parse(xhr.responseText);
         var t = r && r.responseData && r.responseData.translatedText;
-        if(t){
-          t = t.toLowerCase();
-          transCache[key] = t;
-          saveCache();
-          callback(t, false);
-          return;
-        }
+        if(t){ t = t.toLowerCase(); transCache[key] = t; saveCache(); callback(t, false); return; }
       } catch(e){}
     }
     callback(null, false);
@@ -399,7 +299,6 @@ function translate(text, from, to, callback){
   xhr.send();
 }
 
-/* Batch translate a list of English words to Ukrainian */
 function translateBatch(words, callback){
   var results = [];
   var remaining = words.length;
@@ -407,13 +306,9 @@ function translateBatch(words, callback){
   if(remaining === 0){ callback([], false); return; }
   for(var i=0;i<words.length;i++){
     (function(idx){
-      translate(words[idx], 'en', 'uk', function(uk, fromCache){
-        if(uk){
-          results[idx] = { en: words[idx], uk: uk };
-        } else {
-          results[idx] = null;
-          failed = true;
-        }
+      translate(words[idx], 'en', 'uk', function(uk){
+        if(uk){ results[idx] = { en: words[idx], uk: uk }; }
+        else { results[idx] = null; failed = true; }
         remaining--;
         if(remaining === 0){ callback(results, failed); }
       });
@@ -421,9 +316,6 @@ function translateBatch(words, callback){
   }
 }
 
-/* ============================================================
-   SPEECH — Samantha (EN) + Lesya (UK)
-   ============================================================ */
 function speak(text, lang){
   try {
     if(!window.speechSynthesis) return;
@@ -436,11 +328,9 @@ function speak(text, lang){
     var voices = window.speechSynthesis.getVoices() || [];
     var preferred = t === 'uk' ? 'Lesya' : 'Samantha';
     var chosen = null;
-    /* 1. exact preferred name */
     for(var i=0;i<voices.length;i++){
       if(voices[i].name && voices[i].name.indexOf(preferred) === 0){ chosen = voices[i]; break; }
     }
-    /* 2. any voice matching the language prefix */
     if(!chosen){
       for(var j=0;j<voices.length;j++){
         var v = voices[j];
@@ -451,20 +341,16 @@ function speak(text, lang){
     window.speechSynthesis.speak(u);
   } catch(e){}
 }
-if(window.speechSynthesis){
-  window.speechSynthesis.onvoiceschanged = function(){};
-}
+if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = function(){}; }
 
-/* ============================================================
-   STATE
-   ============================================================ */
 var STATE_KEY = 'learny_v1';
 var prefs = { uiLang:'uk', learnLang:'en' };
-var state = { completed:0, xp:0, gems:50, streak:1, hearts:5 };
+var state = { completed:0, xp:0, gems:50, streak:1 };
+var devUnlocked = false;
+var devTapCount = 0;
+var devTapTimer = null;
 
-function saveState(){
-  try { localStorage.setItem(STATE_KEY, JSON.stringify({state:state, prefs:prefs})); } catch(e){}
-}
+function saveState(){ try{ localStorage.setItem(STATE_KEY, JSON.stringify({state:state, prefs:prefs})); }catch(e){} }
 function loadState(){
   try {
     var raw = localStorage.getItem(STATE_KEY);
@@ -476,19 +362,15 @@ function loadState(){
   } catch(e){}
 }
 
-/* ============================================================
-   NAV
-   ============================================================ */
 var elHome = document.getElementById('homeView');
 var elLesson = document.getElementById('lessonView');
 var elDict = document.getElementById('dictView');
 var elComplete = document.getElementById('completeView');
 var elSettings = document.getElementById('settingsModal');
+var elDev = document.getElementById('devModal');
 
-function t(k){
-  var L = UI[prefs.uiLang] || UI.uk;
-  return L[k] || k;
-}
+function t(k){ var L = UI[prefs.uiLang] || UI.uk; return L[k] || k; }
+
 function refreshUILabels(){
   document.getElementById('heroTitle').textContent = prefs.uiLang === 'uk'
     ? (prefs.learnLang === 'en' ? 'Англійська' : 'Українська')
@@ -501,6 +383,7 @@ function refreshUILabels(){
     ? 'Переклад онлайн · 🔊 = англійська · 🟠 = українська'
     : 'Online translation · 🔊 = English · 🟠 = Ukrainian';
 }
+
 function showHome(){
   elHome.style.display = '';
   elLesson.classList.remove('active');
@@ -516,18 +399,14 @@ function showDict(){
   document.getElementById('dictStatus').textContent = t('dictHint');
   document.getElementById('dictList').innerHTML = '';
   document.getElementById('dictSearch').value = '';
-  document.getElementById('dictSearch').focus();
+  setTimeout(function(){ document.getElementById('dictSearch').focus(); }, 100);
 }
 function toggleSettings(){ elSettings.classList.toggle('active'); }
 function setUILang(v){ prefs.uiLang = v; saveState(); refreshUILabels(); renderLessons(); }
 function setLearnLang(v){ prefs.learnLang = v; saveState(); refreshUILabels(); renderLessons(); }
 
-/* ============================================================
-   HOME — lesson list
-   ============================================================ */
 function renderLessons(){
-  document.getElementById('heroSub').textContent =
-    state.completed + ' / ' + THEMES.length + ' ' + t('lessons');
+  document.getElementById('heroSub').textContent = state.completed + ' / ' + THEMES.length + ' ' + t('lessons');
   document.getElementById('heroXpBig').textContent = state.xp;
   document.getElementById('xpVal').textContent = state.xp;
   document.getElementById('gemVal').textContent = state.gems;
@@ -543,37 +422,27 @@ function renderLessons(){
     card.className = 'lesson-card' + (done?' done':'') + (locked?' locked':'');
     var iconClass = 'lesson-icon' + (done?' done':'') + (locked?' locked':'');
     var title = prefs.uiLang === 'uk' ? theme.uk : theme.en;
-    var meta = locked ? t('locked')
-              : done ? t('completed')
-              : (theme.words.length * 2) + ' ' + t('questions');
-    card.innerHTML =
-      '<div class="' + iconClass + '">' + (locked ? '🔒' : theme.icon) + '</div>' +
+    var meta = locked ? t('locked') : done ? t('completed') : (theme.words.length * 2) + ' ' + t('questions');
+    card.innerHTML = '<div class="' + iconClass + '">' + (locked ? '🔒' : theme.icon) + '</div>' +
       '<div class="lesson-info"><h3>' + title + '</h3><p>' + meta + '</p></div>' +
       '<div class="lesson-arrow">' + (done ? '★' : '›') + '</div>';
     if(!locked){
-      (function(idx){
-        card.onclick = function(){ startLesson(idx); };
-      })(i);
+      (function(idx){ card.onclick = function(){ startLesson(idx); }; })(i);
     }
     cont.appendChild(card);
   }
 }
 
-/* ============================================================
-   LESSON
-   ============================================================ */
 var currentLesson = null;
 var currentLessonIndex = -1;
 var qIndex = 0;
 var selected = null;
 var checked = false;
-var hearts = 5;
 
 function startLesson(index){
   currentLessonIndex = index;
   currentLesson = THEMES[index];
   qIndex = 0;
-  hearts = 5;
   selected = null;
   checked = false;
 
@@ -581,36 +450,22 @@ function startLesson(index){
   elDict.classList.remove('active');
   elComplete.classList.remove('active');
   elLesson.classList.add('active');
-  document.getElementById('heartsLive').textContent = '❤️ ' + hearts;
 
-  /* show loading */
   var area = document.getElementById('questionArea');
-  area.innerHTML =
-    '<div class="loading">' +
-      '<div class="loading-spinner"></div>' +
-      '<div>' + t('loading') + '</div>' +
-    '</div>';
+  area.innerHTML = '<div class="loading"><div class="loading-spinner"></div><div>' + t('loading') + '</div></div>';
   document.getElementById('lessonProgress').style.width = '0%';
   document.getElementById('mainBtn').disabled = true;
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
 
-  /* fetch all translations for this theme, then build the questions */
   translateBatch(currentLesson.words, function(results, failed){
     if(failed && !results.some(function(r){ return r; })){
-      area.innerHTML = '<div class="loading">' +
-        '<div style="font-size:48px">📡</div>' +
-        '<div>' + t('dictError') + '</div>' +
-        '<button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button>' +
-      '</div>';
+      area.innerHTML = '<div class="loading"><div style="font-size:48px">📡</div><div>' + t('dictError') + '</div><button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button></div>';
       return;
     }
     var pairs = results.filter(function(r){ return r; });
     if(pairs.length < 4){
-      area.innerHTML = '<div class="loading">' +
-        '<div style="font-size:48px">⚠️</div>' +
-        '<div>' + (prefs.uiLang === 'uk' ? 'Мало слів для уроку' : 'Not enough words') + '</div>' +
-      '</div>';
+      area.innerHTML = '<div class="loading"><div style="font-size:48px">⚠️</div><div>' + (prefs.uiLang === 'uk' ? 'Мало слів для уроку' : 'Not enough words') + '</div></div>';
       return;
     }
     buildQuestions(pairs);
@@ -628,47 +483,28 @@ function buildQuestions(pairs){
   for(var w=0;w<pairs.length;w++){
     var en = pairs[w].en;
     var uk = pairs[w].uk;
-
-    /* EN → UK */
     var otherUk = [];
     for(var a=0;a<pairs.length;a++){ if(a !== w) otherUk.push(pairs[a].uk); }
     otherUk = shuffle(otherUk).slice(0,3);
-    qs.push({
-      type:'mc',
-      q:'Що означає "' + en + '"?',
-      options: shuffle([uk].concat(otherUk)),
-      answerText: uk
-    });
-
-    /* UK → EN */
+    qs.push({ type:'mc', q:'Що означає "' + en + '"?', options: shuffle([uk].concat(otherUk)), answerText: uk });
     var otherEn = [];
     for(var b=0;b<pairs.length;b++){ if(b !== w) otherEn.push(pairs[b].en); }
     otherEn = shuffle(otherEn).slice(0,3);
-    qs.push({
-      type:'mc',
-      q:'Яке слово означає "' + uk + '"?',
-      options: shuffle([en].concat(otherEn)),
-      answerText: en
-    });
+    qs.push({ type:'mc', q:'Яке слово означає "' + uk + '"?', options: shuffle([en].concat(otherEn)), answerText: en });
   }
   currentLesson.questions = shuffle(qs);
 }
 
 function renderQuestion(){
   var q = currentLesson.questions[qIndex];
-  document.getElementById('lessonProgress').style.width =
-    ((qIndex + 1) / currentLesson.questions.length * 100) + '%';
-  document.getElementById('heartsLive').textContent = '❤️ ' + hearts;
-
+  document.getElementById('lessonProgress').style.width = ((qIndex + 1) / currentLesson.questions.length * 100) + '%';
   var area = document.getElementById('questionArea');
   area.innerHTML = '';
-
   var qt = document.createElement('div');
   qt.className = 'question';
   qt.id = 'questionText';
   qt.textContent = q.q;
   area.appendChild(qt);
-
   var box = document.createElement('div');
   box.className = 'options';
   box.id = 'optionsBox';
@@ -680,7 +516,6 @@ function renderQuestion(){
     box.appendChild(opt);
   }
   area.appendChild(box);
-
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
   var btn = document.getElementById('mainBtn');
@@ -702,7 +537,6 @@ function selectOption(text, el){
 
 function handleMainBtn(){
   var q = currentLesson.questions[qIndex];
-
   if(!checked){
     checked = true;
     var correct = (selected === q.answerText);
@@ -719,8 +553,6 @@ function handleMainBtn(){
       fb.className = 'feedback ok';
       btn.className = 'btn correct';
     } else {
-      hearts--;
-      document.getElementById('heartsLive').textContent = '❤️ ' + hearts;
       fb.textContent = t('wrong');
       fb.className = 'feedback bad';
       btn.className = 'btn wrong';
@@ -729,13 +561,6 @@ function handleMainBtn(){
       setTimeout(function(){ qe.classList.remove('shake'); }, 500);
     }
     btn.textContent = t('cont');
-    if(hearts <= 0){
-      setTimeout(function(){
-        alert(prefs.uiLang === 'uk' ? 'Скінчилися серця!' : 'Out of hearts!');
-        hearts = 5;
-        exitLesson();
-      }, 700);
-    }
   } else {
     if(qIndex < currentLesson.questions.length - 1){
       qIndex++;
@@ -746,9 +571,7 @@ function handleMainBtn(){
       state.xp += gained;
       state.gems += 15;
       saveState();
-      var title = prefs.uiLang === 'uk'
-        ? currentLesson.uk
-        : currentLesson.en;
+      var title = prefs.uiLang === 'uk' ? currentLesson.uk : currentLesson.en;
       document.getElementById('completeTitle').textContent = title;
       document.getElementById('xpGained').textContent = gained;
       elLesson.classList.remove('active');
@@ -757,21 +580,11 @@ function handleMainBtn(){
   }
 }
 
-function exitLesson(){
-  elLesson.classList.remove('active');
-  showHome();
-}
-function backHome(){
-  elComplete.classList.remove('active');
-  showHome();
-}
+function exitLesson(){ elLesson.classList.remove('active'); showHome(); }
+function backHome(){ elComplete.classList.remove('active'); showHome(); }
 
-/* ============================================================
-   DICTIONARY — online lookup with cache
-   ============================================================ */
 var dictTimer = null;
 var lastQuery = '';
-
 function onDictInput(){
   var q = document.getElementById('dictSearch').value.trim();
   if(q === lastQuery) return;
@@ -785,45 +598,34 @@ function onDictInput(){
   document.getElementById('dictStatus').textContent = t('loadingShort');
   dictTimer = setTimeout(function(){ lookupWord(q); }, 450);
 }
-
 function lookupWord(q){
   var list = document.getElementById('dictList');
   var status = document.getElementById('dictStatus');
   list.innerHTML = '';
-
   var isCyrillic = /[а-яіїєґ]/i.test(q);
   var from = isCyrillic ? 'uk' : 'en';
   var to = isCyrillic ? 'en' : 'uk';
-
   translate(q, from, to, function(result, fromCache){
-    if(!result){
-      status.textContent = t('emptyDict');
-      return;
-    }
-    status.textContent = (fromCache ? t('dictCache') : t('dictOnline'));
+    if(!result){ status.textContent = t('emptyDict'); return; }
+    status.textContent = fromCache ? t('dictCache') : t('dictOnline');
     var en = from === 'en' ? q : result;
     var uk = from === 'uk' ? q : result;
     renderDictItem(en, uk, fromCache);
   });
 }
-
 function renderDictItem(en, uk, fromCache){
   var list = document.getElementById('dictList');
   list.innerHTML = '';
-
   var row = document.createElement('div');
   row.className = 'dict-item';
-
   var spkEn = document.createElement('button');
   spkEn.className = 'dict-audio en';
   spkEn.textContent = '🔊';
   spkEn.onclick = function(){ speak(en, 'en'); };
-
   var spkUk = document.createElement('button');
   spkUk.className = 'dict-audio uk';
   spkUk.textContent = '🔊';
   spkUk.onclick = function(){ speak(uk, 'uk'); };
-
   var enDiv = document.createElement('div');
   enDiv.className = 'dict-en';
   enDiv.textContent = en;
@@ -833,22 +635,87 @@ function renderDictItem(en, uk, fromCache){
     badge.textContent = '✓';
     enDiv.appendChild(badge);
   }
-
   var ukDiv = document.createElement('div');
   ukDiv.className = 'dict-uk';
   ukDiv.textContent = uk;
-
   row.appendChild(spkEn);
   row.appendChild(enDiv);
   row.appendChild(ukDiv);
   row.appendChild(spkUk);
-
   list.appendChild(row);
 }
 
-/* ============================================================
-   BOOT
-   ============================================================ */
+/* ===== DEV TOOLS ===== */
+document.getElementById('logoBtn').addEventListener('click', function(){
+  devTapCount++;
+  if(devTapTimer) clearTimeout(devTapTimer);
+  devTapTimer = setTimeout(function(){ devTapCount = 0; }, 1500);
+  if(devTapCount >= 5){
+    devTapCount = 0;
+    var answer = prompt('6?');
+    if(answer === '7'){
+      devUnlocked = true;
+      document.getElementById('devBtn').classList.remove('hidden');
+      alert('Dev tools unlocked 🔧');
+    }
+  }
+});
+
+function openDevPanel(){
+  buildUnlockChips();
+  elDev.classList.add('active');
+  document.getElementById('devStatus').textContent = '';
+}
+function closeDevPanel(){ elDev.classList.remove('active'); }
+
+function buildUnlockChips(){
+  var cont = document.getElementById('unlockChips');
+  cont.innerHTML = '';
+  var options = [5, 10, 15, 20, THEMES.length];
+  for(var i=0;i<options.length;i++){
+    (function(n){
+      var chip = document.createElement('button');
+      chip.className = 'dev-chip';
+      chip.textContent = n === THEMES.length ? 'ALL' : n;
+      chip.onclick = function(){
+        state.completed = n;
+        saveState();
+        renderLessons();
+        document.getElementById('devStatus').textContent = '✅ Розблоковано до ' + n;
+      };
+      cont.appendChild(chip);
+    })(options[i]);
+  }
+}
+
+function customUnlockClick(){
+  var v = parseInt(document.getElementById('customUnlock').value, 10);
+  if(isNaN(v) || v < 0) return;
+  if(v > THEMES.length) v = THEMES.length;
+  state.completed = v;
+  saveState();
+  renderLessons();
+  document.getElementById('customUnlock').value = '';
+  document.getElementById('devStatus').textContent = '✅ Розблоковано до ' + v;
+}
+
+function devReset(){
+  if(!confirm('Скинути весь прогрес?')) return;
+  state.completed = 0;
+  state.xp = 0;
+  state.gems = 50;
+  saveState();
+  renderLessons();
+  document.getElementById('devStatus').textContent = '🔄 Прогрес скинуто';
+}
+
+function lockDev(){
+  devUnlocked = false;
+  document.getElementById('devBtn').classList.add('hidden');
+  closeDevPanel();
+}
+
+/* ===== BOOT ===== */
 loadState();
 loadCache();
 refreshUILabels();

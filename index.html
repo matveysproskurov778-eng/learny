@@ -126,12 +126,8 @@
   .dev-input{flex:1;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;font-weight:700;color:#0f172a;font-family:inherit;outline:none;min-width:0}
   .dev-input:focus{border-color:#06b6d4}
   .dev-btn{width:100%;padding:14px;margin-top:8px;border:none;border-radius:14px;font-weight:900;font-size:14px;letter-spacing:1px;cursor:pointer;font-family:inherit;transition:.08s}
-  .dev-btn.primary{background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;box-shadow:0 4px 0 #0891b2}
-  .dev-btn.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #0891b2}
   .dev-btn.danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;box-shadow:0 4px 0 #991b1b}
-  .dev-btn.danger:active{transform:translateY(2px);box-shadow:0 2px 0 #991b1b}
   .dev-btn.ghost{background:#fff;color:#64748b;border:2px solid #e2e8f0}
-  .dev-btn.ghost:active{background:#f1f5f9}
   .dev-status{font-size:12px;font-weight:700;color:#22c55e;text-align:center;margin-top:10px;min-height:16px}
 </style>
 </head>
@@ -207,7 +203,7 @@
       <option value="en">🇬🇧 Англійська</option>
       <option value="uk">🇺🇦 Українська</option>
     </select>
-    <div class="note">Озвучення: Samantha (англійська) + Lesya (українська). Переклад онлайн через MyMemory.</div>
+    <div class="note">Озвучення: Samantha (англійська) + Lesya (українська). Переклад через Lingva + MyMemory.</div>
     <button class="close" onclick="toggleSettings()">ЗАКРИТИ</button>
   </div>
 </div>
@@ -235,13 +231,15 @@ var UI = {
         locked:'Заблоковано', completed:'Пройдено', questions:'питань',
         loading:'Завантаження перекладів...', loadingShort:'Хвилинку...',
         emptyDict:'Нічого не знайдено', dictHint:'Введіть слово англійською або українською',
-        dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі' },
+        dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі',
+        listenPick:'🎧 Прослухайте та виберіть, що почули:' },
   en: { lessons:'lessons', check:'CHECK', cont:'CONTINUE',
         correct:'✅ Correct!', wrong:'❌ Not quite', complete:'Lesson complete!',
         locked:'Locked', completed:'Completed', questions:'questions',
         loading:'Loading translations...', loadingShort:'One moment...',
         emptyDict:'Nothing found', dictHint:'Type a word in English or Ukrainian',
-        dictOnline:'online translation', dictCache:'from cache', dictError:'Network error' }
+        dictOnline:'online translation', dictCache:'from cache', dictError:'Network error',
+        listenPick:'🎧 Listen and pick what you heard:' }
 };
 
 var THEMES = [
@@ -272,14 +270,56 @@ var THEMES = [
   { uk:'Подорожі',  en:'Travel',  icon:'✈️', words:['travel','trip','journey','ticket','passport','luggage','hotel','beach','mountain','sea','map','tourist','country','city','visit'] }
 ];
 
-var CACHE_KEY = 'learny_cache_v1';
+/* ============================================================
+   TRANSLATION — Lingva primary + MyMemory fallback + cache
+   ============================================================ */
+var CACHE_KEY = 'learny_cache_v2';
 var transCache = {};
 function loadCache(){ try{ var r=localStorage.getItem(CACHE_KEY); if(r) transCache=JSON.parse(r); }catch(e){ transCache={}; } }
 function saveCache(){ try{ localStorage.setItem(CACHE_KEY, JSON.stringify(transCache)); }catch(e){} }
 
-function translate(text, from, to, callback){
-  var key = from + '|' + to + '|' + text.toLowerCase();
-  if(transCache[key]){ callback(transCache[key], true); return; }
+/* Clean translation text — strip punctuation, HTML entities, newlines */
+function cleanTranslation(s){
+  if(!s) return '';
+  var t = String(s);
+  /* decode common HTML entities */
+  t = t.replace(/&#(\d+);/g, function(m, n){ try{ return String.fromCharCode(parseInt(n,10)); }catch(e){ return ' '; } });
+  t = t.replace(/&#x([0-9a-f]+);/gi, function(m, n){ try{ return String.fromCharCode(parseInt(n,16)); }catch(e){ return ' '; } });
+  t = t.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&apos;/g,"'").replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+  /* collapse newlines/tabs to spaces */
+  t = t.replace(/[\r\n\t]+/g,' ');
+  /* trim */
+  t = t.trim();
+  /* strip trailing/leading punctuation and quotes */
+  t = t.replace(/^[\s"'«»\.\,\!\?\:\;]+/,'').replace(/[\s"'«»\.\,\!\?\:\;]+$/,'');
+  t = t.trim();
+  /* collapse internal double spaces */
+  t = t.replace(/\s{2,}/g,' ');
+  return t;
+}
+
+/* Try Lingva first */
+function translateLingva(text, from, to, callback){
+  var url = 'https://lingva.ml/api/v1/' + from + '/' + to + '/' + encodeURIComponent(text);
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.timeout = 8000;
+  xhr.onload = function(){
+    if(xhr.status === 200){
+      try {
+        var r = JSON.parse(xhr.responseText);
+        if(r && r.translation){ callback(r.translation); return; }
+      } catch(e){}
+    }
+    callback(null);
+  };
+  xhr.onerror = function(){ callback(null); };
+  xhr.ontimeout = function(){ callback(null); };
+  xhr.send();
+}
+
+/* Fallback MyMemory */
+function translateMyMemory(text, from, to, callback){
   var url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to;
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
@@ -289,14 +329,38 @@ function translate(text, from, to, callback){
       try {
         var r = JSON.parse(xhr.responseText);
         var t = r && r.responseData && r.responseData.translatedText;
-        if(t){ t = t.toLowerCase(); transCache[key] = t; saveCache(); callback(t, false); return; }
+        if(t){ callback(t); return; }
       } catch(e){}
     }
-    callback(null, false);
+    callback(null);
   };
-  xhr.onerror = function(){ callback(null, false); };
-  xhr.ontimeout = function(){ callback(null, false); };
+  xhr.onerror = function(){ callback(null); };
+  xhr.ontimeout = function(){ callback(null); };
   xhr.send();
+}
+
+function translate(text, from, to, callback){
+  var key = from + '|' + to + '|' + text.toLowerCase();
+  if(transCache[key]){ callback(transCache[key], true); return; }
+  translateLingva(text, from, to, function(raw){
+    if(!raw){
+      /* Lingva failed, try MyMemory */
+      translateMyMemory(text, from, to, function(raw2){
+        if(!raw2){ callback(null, false); return; }
+        var clean = cleanTranslation(raw2);
+        if(!clean){ callback(null, false); return; }
+        transCache[key] = clean;
+        saveCache();
+        callback(clean, false);
+      });
+      return;
+    }
+    var clean = cleanTranslation(raw);
+    if(!clean){ callback(null, false); return; }
+    transCache[key] = clean;
+    saveCache();
+    callback(clean, false);
+  });
 }
 
 function translateBatch(words, callback){
@@ -316,6 +380,9 @@ function translateBatch(words, callback){
   }
 }
 
+/* ============================================================
+   SPEECH — Samantha (EN) + Lesya (UK)
+   ============================================================ */
 function speak(text, lang){
   try {
     if(!window.speechSynthesis) return;
@@ -343,6 +410,9 @@ function speak(text, lang){
 }
 if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = function(){}; }
 
+/* ============================================================
+   STATE
+   ============================================================ */
 var STATE_KEY = 'learny_v1';
 var prefs = { uiLang:'uk', learnLang:'en' };
 var state = { completed:0, xp:0, gems:50, streak:1 };
@@ -422,7 +492,7 @@ function renderLessons(){
     card.className = 'lesson-card' + (done?' done':'') + (locked?' locked':'');
     var iconClass = 'lesson-icon' + (done?' done':'') + (locked?' locked':'');
     var title = prefs.uiLang === 'uk' ? theme.uk : theme.en;
-    var meta = locked ? t('locked') : done ? t('completed') : (theme.words.length * 2) + ' ' + t('questions');
+    var meta = locked ? t('locked') : done ? t('completed') : '18 ' + t('questions');
     card.innerHTML = '<div class="' + iconClass + '">' + (locked ? '🔒' : theme.icon) + '</div>' +
       '<div class="lesson-info"><h3>' + title + '</h3><p>' + meta + '</p></div>' +
       '<div class="lesson-arrow">' + (done ? '★' : '›') + '</div>';
@@ -433,6 +503,9 @@ function renderLessons(){
   }
 }
 
+/* ============================================================
+   LESSON
+   ============================================================ */
 var currentLesson = null;
 var currentLessonIndex = -1;
 var qIndex = 0;
@@ -459,13 +532,10 @@ function startLesson(index){
   document.getElementById('feedback').className = 'feedback';
 
   translateBatch(currentLesson.words, function(results, failed){
-    if(failed && !results.some(function(r){ return r; })){
-      area.innerHTML = '<div class="loading"><div style="font-size:48px">📡</div><div>' + t('dictError') + '</div><button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button></div>';
-      return;
-    }
     var pairs = results.filter(function(r){ return r; });
-    if(pairs.length < 4){
-      area.innerHTML = '<div class="loading"><div style="font-size:48px">⚠️</div><div>' + (prefs.uiLang === 'uk' ? 'Мало слів для уроку' : 'Not enough words') + '</div></div>';
+    /* need at least 12 valid pairs to build 18 questions (9 words × 2) */
+    if(pairs.length < 9){
+      area.innerHTML = '<div class="loading"><div style="font-size:48px">📡</div><div>' + t('dictError') + '</div><button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button></div>';
       return;
     }
     buildQuestions(pairs);
@@ -473,25 +543,55 @@ function startLesson(index){
   });
 }
 
+function shuffle(a){
+  a = a.slice();
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
+  return a;
+}
+
 function buildQuestions(pairs){
-  function shuffle(a){
-    a = a.slice();
-    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
-    return a;
-  }
+  /* pick 9 random words from the 15 */
+  var pool = shuffle(pairs).slice(0, 9);
   var qs = [];
-  for(var w=0;w<pairs.length;w++){
-    var en = pairs[w].en;
-    var uk = pairs[w].uk;
+
+  for(var w=0;w<pool.length;w++){
+    var en = pool[w].en;
+    var uk = pool[w].uk;
+
+    /* EN → UK */
     var otherUk = [];
-    for(var a=0;a<pairs.length;a++){ if(a !== w) otherUk.push(pairs[a].uk); }
+    for(var a=0;a<pool.length;a++){ if(a !== w && pool[a].uk !== uk) otherUk.push(pool[a].uk); }
     otherUk = shuffle(otherUk).slice(0,3);
-    qs.push({ type:'mc', q:'Що означає "' + en + '"?', options: shuffle([uk].concat(otherUk)), answerText: uk });
+    if(otherUk.length === 3){
+      qs.push({ type:'mc', q:'Що означає "' + en + '"?', options: shuffle([uk].concat(otherUk)), answerText: uk });
+    }
+
+    /* UK → EN */
     var otherEn = [];
-    for(var b=0;b<pairs.length;b++){ if(b !== w) otherEn.push(pairs[b].en); }
+    for(var b=0;b<pool.length;b++){ if(b !== w && pool[b].en !== en) otherEn.push(pool[b].en); }
     otherEn = shuffle(otherEn).slice(0,3);
-    qs.push({ type:'mc', q:'Яке слово означає "' + uk + '"?', options: shuffle([en].concat(otherEn)), answerText: en });
+    if(otherEn.length === 3){
+      qs.push({ type:'mc', q:'Яке слово означає "' + uk + '"?', options: shuffle([en].concat(otherEn)), answerText: en });
+    }
   }
+
+  /* trim to 15 MC questions max, then add 3 voice questions */
+  qs = shuffle(qs).slice(0, 15);
+
+  /* pick 3 random words for voice questions (from full pairs, not just pool) */
+  var voicePool = shuffle(pairs).slice(0, 3);
+  for(var v=0;v<voicePool.length;v++){
+    var vEn = voicePool[v].en;
+    var vUk = voicePool[v].uk;
+    var vOthers = [];
+    for(var c=0;c<pairs.length;c++){ if(pairs[c].en !== vEn) vOthers.push(pairs[c].en); }
+    vOthers = shuffle(vOthers).slice(0,3);
+    if(vOthers.length === 3){
+      qs.push({ type:'voice', q:t('listenPick'), speak:vEn, speakLang:'en', options: shuffle([vEn].concat(vOthers)), answerText: vEn });
+    }
+  }
+
+  /* shuffle everything so voice is interleaved */
   currentLesson.questions = shuffle(qs);
 }
 
@@ -500,11 +600,25 @@ function renderQuestion(){
   document.getElementById('lessonProgress').style.width = ((qIndex + 1) / currentLesson.questions.length * 100) + '%';
   var area = document.getElementById('questionArea');
   area.innerHTML = '';
+
+  if(q.type === 'voice'){
+    var srow = document.createElement('div');
+    srow.className = 'speaker-row';
+    var spk = document.createElement('button');
+    spk.className = 'speaker-btn';
+    spk.innerHTML = '🔊';
+    spk.onclick = function(){ speak(q.speak, q.speakLang || 'en'); };
+    srow.appendChild(spk);
+    area.appendChild(srow);
+    setTimeout(function(){ speak(q.speak, q.speakLang || 'en'); }, 350);
+  }
+
   var qt = document.createElement('div');
-  qt.className = 'question';
+  qt.className = 'question' + (q.type === 'voice' ? ' small' : '');
   qt.id = 'questionText';
   qt.textContent = q.q;
   area.appendChild(qt);
+
   var box = document.createElement('div');
   box.className = 'options';
   box.id = 'optionsBox';
@@ -516,6 +630,7 @@ function renderQuestion(){
     box.appendChild(opt);
   }
   area.appendChild(box);
+
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
   var btn = document.getElementById('mainBtn');
@@ -537,6 +652,7 @@ function selectOption(text, el){
 
 function handleMainBtn(){
   var q = currentLesson.questions[qIndex];
+
   if(!checked){
     checked = true;
     var correct = (selected === q.answerText);
@@ -557,8 +673,7 @@ function handleMainBtn(){
       fb.className = 'feedback bad';
       btn.className = 'btn wrong';
       var qe = document.getElementById('questionText');
-      qe.classList.add('shake');
-      setTimeout(function(){ qe.classList.remove('shake'); }, 500);
+      if(qe){ qe.classList.add('shake'); setTimeout(function(){ qe.classList.remove('shake'); }, 500); }
     }
     btn.textContent = t('cont');
   } else {
@@ -583,6 +698,9 @@ function handleMainBtn(){
 function exitLesson(){ elLesson.classList.remove('active'); showHome(); }
 function backHome(){ elComplete.classList.remove('active'); showHome(); }
 
+/* ============================================================
+   DICTIONARY
+   ============================================================ */
 var dictTimer = null;
 var lastQuery = '';
 function onDictInput(){
@@ -645,7 +763,9 @@ function renderDictItem(en, uk, fromCache){
   list.appendChild(row);
 }
 
-/* ===== DEV TOOLS ===== */
+/* ============================================================
+   DEV TOOLS
+   ============================================================ */
 document.getElementById('logoBtn').addEventListener('click', function(){
   devTapCount++;
   if(devTapTimer) clearTimeout(devTapTimer);
@@ -687,7 +807,6 @@ function buildUnlockChips(){
     })(options[i]);
   }
 }
-
 function customUnlockClick(){
   var v = parseInt(document.getElementById('customUnlock').value, 10);
   if(isNaN(v) || v < 0) return;
@@ -698,7 +817,6 @@ function customUnlockClick(){
   document.getElementById('customUnlock').value = '';
   document.getElementById('devStatus').textContent = '✅ Розблоковано до ' + v;
 }
-
 function devReset(){
   if(!confirm('Скинути весь прогрес?')) return;
   state.completed = 0;
@@ -708,14 +826,15 @@ function devReset(){
   renderLessons();
   document.getElementById('devStatus').textContent = '🔄 Прогрес скинуто';
 }
-
 function lockDev(){
   devUnlocked = false;
   document.getElementById('devBtn').classList.add('hidden');
   closeDevPanel();
 }
 
-/* ===== BOOT ===== */
+/* ============================================================
+   BOOT
+   ============================================================ */
 loadState();
 loadCache();
 refreshUILabels();

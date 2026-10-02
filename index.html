@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Learny">
 <meta name="theme-color" content="#06b6d4">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon.png">
+<link rel="apple-touch-icon" href="logo.png">
 <title>Learny</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
@@ -81,6 +81,14 @@
   .btn.correct{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 5px 0 #15803d}
   @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-12px)}40%{transform:translateX(12px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
   .shake{animation:shake .45s}
+  .mic-btn{width:130px;height:130px;border-radius:50%;border:none;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;font-size:56px;cursor:pointer;box-shadow:0 7px 0 #c2410c;font-family:inherit;transition:.1s}
+  .mic-btn:hover{filter:brightness(1.06)}
+  .mic-btn:active{transform:translateY(4px);box-shadow:0 3px 0 #c2410c}
+  .mic-btn.listening{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 7px 0 #991b1b;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .mic-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:22px}
+  .mic-status{font-size:14px;color:#64748b;font-weight:700;text-align:center;min-height:20px}
+  .mic-heard{font-size:18px;font-weight:900;color:#0f172a;text-align:center;min-height:24px}
   .dict{display:none;flex-direction:column;flex:1;padding:18px 22px calc(env(safe-area-inset-bottom) + 20px);overflow:hidden}
   .dict.active{display:flex}
   .dict h1{font-size:26px;font-weight:900;margin-bottom:4px}
@@ -149,7 +157,7 @@
     <div class="hero-flag" id="heroFlag">🇬🇧</div>
     <div>
       <h1 id="heroTitle">Англійська</h1>
-      <p id="heroSub">0 / 25 уроків</p>
+      <p id="heroSub">0 / 30 уроків</p>
     </div>
     <div class="hero-xp">
       <div class="big" id="heroXpBig">0</div>
@@ -215,7 +223,7 @@
     <label>РОЗБЛОКУВАТИ ДО УРОКУ</label>
     <div class="dev-row" id="unlockChips"></div>
     <div class="dev-row">
-      <input class="dev-input" id="customUnlock" type="number" min="0" max="25" placeholder="Свій номер">
+      <input class="dev-input" id="customUnlock" type="number" min="0" max="30" placeholder="Свій номер">
       <button class="dev-chip" onclick="customUnlockClick()">OK</button>
     </div>
     <button class="dev-btn danger" onclick="devReset()">СКИНУТИ ПРОГРЕС</button>
@@ -232,14 +240,28 @@ var UI = {
         loading:'Завантаження перекладів...', loadingShort:'Хвилинку...',
         emptyDict:'Нічого не знайдено', dictHint:'Введіть слово англійською або українською',
         dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі',
-        listenPick:'🎧 Прослухайте та виберіть, що почули:' },
+        listenPick:'🎧 Прослухайте та виберіть, що почули:',
+        readPick:'📖 Прочитайте та виберіть переклад:',
+        sayWord:'🎤 Скажіть це слово:',
+        tapToSpeak:'Натисніть і говоріть',
+        listening:'Слухаю...',
+        youSaid:'Ми почули:',
+        tryAgain:'Спробуйте ще',
+        notSupported:'Мікрофон не підтримується' },
   en: { lessons:'lessons', check:'CHECK', cont:'CONTINUE',
         correct:'✅ Correct!', wrong:'❌ Not quite', complete:'Lesson complete!',
         locked:'Locked', completed:'Completed', questions:'questions',
         loading:'Loading translations...', loadingShort:'One moment...',
         emptyDict:'Nothing found', dictHint:'Type a word in English or Ukrainian',
         dictOnline:'online translation', dictCache:'from cache', dictError:'Network error',
-        listenPick:'🎧 Listen and pick what you heard:' }
+        listenPick:'🎧 Listen and pick what you heard:',
+        readPick:'📖 Read and pick the translation:',
+        sayWord:'🎤 Say this word:',
+        tapToSpeak:'Tap and speak',
+        listening:'Listening...',
+        youSaid:'We heard:',
+        tryAgain:'Try again',
+        notSupported:'Microphone not supported' }
 };
 
 var THEMES = [
@@ -267,38 +289,52 @@ var THEMES = [
   { uk:'Прикметники',  en:'Adjectives',  icon:'✨', words:['big','small','good','bad','new','old','beautiful','ugly','fast','slow','easy','hard','happy','sad','important'] },
   { uk:'Емоції',  en:'Feelings',  icon:'😊', words:['happy','sad','angry','tired','hungry','thirsty','scared','excited','surprised','bored','love','hate','like','feel','feeling'] },
   { uk:'Здоров\'я',  en:'Health',  icon:'💊', words:['health','doctor','medicine','pain','headache','stomachache','fever','cough','cold','sick','healthy','hospital','pharmacy','rest','tired'] },
-  { uk:'Подорожі',  en:'Travel',  icon:'✈️', words:['travel','trip','journey','ticket','passport','luggage','hotel','beach','mountain','sea','map','tourist','country','city','visit'] }
+  { uk:'Подорожі',  en:'Travel',  icon:'✈️', words:['travel','trip','journey','ticket','passport','luggage','hotel','beach','mountain','sea','map','tourist','country','city','visit'] },
+  { uk:'Напрямки',  en:'Directions',  icon:'🧭', words:['left','right','up','down','forward','back','here','there','near','far','north','south','east','west','straight'] },
+  { uk:'Музика',  en:'Music',  icon:'🎵', words:['music','song','sing','dance','guitar','piano','drum','violin','listen','sound','melody','voice','loud','quiet','concert'] },
+  { uk:'Спорт',  en:'Sports',  icon:'⚽', words:['sport','football','basketball','tennis','swim','run','jump','play','win','lose','team','ball','game','player','coach'] },
+  { uk:'Технології',  en:'Technology',  icon:'💻', words:['computer','phone','internet','email','website','app','screen','keyboard','mouse','click','download','upload','password','account','message'] },
+  { uk:'Природа',  en:'Nature',  icon:'🌳', words:['tree','flower','grass','leaf','river','lake','sea','mountain','forest','sky','sun','moon','star','animal','bird'] }
 ];
 
-/* ============================================================
-   TRANSLATION — Lingva primary + MyMemory fallback + cache
-   ============================================================ */
-var CACHE_KEY = 'learny_cache_v2';
+var CACHE_KEY = 'learny_cache_v3';
 var transCache = {};
 function loadCache(){ try{ var r=localStorage.getItem(CACHE_KEY); if(r) transCache=JSON.parse(r); }catch(e){ transCache={}; } }
 function saveCache(){ try{ localStorage.setItem(CACHE_KEY, JSON.stringify(transCache)); }catch(e){} }
 
-/* Clean translation text — strip punctuation, HTML entities, newlines */
+/* Clean translation text */
 function cleanTranslation(s){
   if(!s) return '';
   var t = String(s);
-  /* decode common HTML entities */
   t = t.replace(/&#(\d+);/g, function(m, n){ try{ return String.fromCharCode(parseInt(n,10)); }catch(e){ return ' '; } });
   t = t.replace(/&#x([0-9a-f]+);/gi, function(m, n){ try{ return String.fromCharCode(parseInt(n,16)); }catch(e){ return ' '; } });
   t = t.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&apos;/g,"'").replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-  /* collapse newlines/tabs to spaces */
   t = t.replace(/[\r\n\t]+/g,' ');
-  /* trim */
   t = t.trim();
-  /* strip trailing/leading punctuation and quotes */
   t = t.replace(/^[\s"'«»\.\,\!\?\:\;]+/,'').replace(/[\s"'«»\.\,\!\?\:\;]+$/,'');
   t = t.trim();
-  /* collapse internal double spaces */
   t = t.replace(/\s{2,}/g,' ');
   return t;
 }
 
-/* Try Lingva first */
+/* Validate a translation: must contain Cyrillic, must differ from input */
+function isValidTranslation(input, output, targetLang){
+  if(!output) return false;
+  var t = output.trim().toLowerCase();
+  var inp = input.trim().toLowerCase();
+  if(t === inp) return false;
+  if(t.length === 0 || t.length > 200) return false;
+  /* error message patterns */
+  if(/error|failed|not found|unavailable|limit/i.test(t)) return false;
+  if(targetLang === 'uk'){
+    if(!/[а-яіїєґ]/i.test(t)) return false;
+  } else if(targetLang === 'en'){
+    if(!/[a-z]/i.test(t)) return false;
+  }
+  return true;
+}
+
+/* Lingva */
 function translateLingva(text, from, to, callback){
   var url = 'https://lingva.ml/api/v1/' + from + '/' + to + '/' + encodeURIComponent(text);
   var xhr = new XMLHttpRequest();
@@ -306,10 +342,7 @@ function translateLingva(text, from, to, callback){
   xhr.timeout = 8000;
   xhr.onload = function(){
     if(xhr.status === 200){
-      try {
-        var r = JSON.parse(xhr.responseText);
-        if(r && r.translation){ callback(r.translation); return; }
-      } catch(e){}
+      try { var r = JSON.parse(xhr.responseText); if(r && r.translation){ callback(r.translation); return; } } catch(e){}
     }
     callback(null);
   };
@@ -318,7 +351,7 @@ function translateLingva(text, from, to, callback){
   xhr.send();
 }
 
-/* Fallback MyMemory */
+/* MyMemory */
 function translateMyMemory(text, from, to, callback){
   var url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to;
   var xhr = new XMLHttpRequest();
@@ -326,11 +359,7 @@ function translateMyMemory(text, from, to, callback){
   xhr.timeout = 8000;
   xhr.onload = function(){
     if(xhr.status === 200){
-      try {
-        var r = JSON.parse(xhr.responseText);
-        var t = r && r.responseData && r.responseData.translatedText;
-        if(t){ callback(t); return; }
-      } catch(e){}
+      try { var r = JSON.parse(xhr.responseText); var t = r && r.responseData && r.responseData.translatedText; if(t){ callback(t); return; } } catch(e){}
     }
     callback(null);
   };
@@ -343,57 +372,55 @@ function translate(text, from, to, callback){
   var key = from + '|' + to + '|' + text.toLowerCase();
   if(transCache[key]){ callback(transCache[key], true); return; }
   translateLingva(text, from, to, function(raw){
-    if(!raw){
-      /* Lingva failed, try MyMemory */
-      translateMyMemory(text, from, to, function(raw2){
-        if(!raw2){ callback(null, false); return; }
-        var clean = cleanTranslation(raw2);
-        if(!clean){ callback(null, false); return; }
-        transCache[key] = clean;
-        saveCache();
-        callback(clean, false);
-      });
+    var clean = cleanTranslation(raw || '');
+    if(raw && isValidTranslation(text, clean, to)){
+      transCache[key] = clean;
+      saveCache();
+      callback(clean, false);
       return;
     }
-    var clean = cleanTranslation(raw);
-    if(!clean){ callback(null, false); return; }
-    transCache[key] = clean;
-    saveCache();
-    callback(clean, false);
+    /* Lingva failed validation → try MyMemory */
+    translateMyMemory(text, from, to, function(raw2){
+      var clean2 = cleanTranslation(raw2 || '');
+      if(raw2 && isValidTranslation(text, clean2, to)){
+        transCache[key] = clean2;
+        saveCache();
+        callback(clean2, false);
+        return;
+      }
+      callback(null, false);
+    });
   });
 }
 
 function translateBatch(words, callback){
   var results = [];
   var remaining = words.length;
-  var failed = false;
   if(remaining === 0){ callback([], false); return; }
   for(var i=0;i<words.length;i++){
     (function(idx){
       translate(words[idx], 'en', 'uk', function(uk){
         if(uk){ results[idx] = { en: words[idx], uk: uk }; }
-        else { results[idx] = null; failed = true; }
+        else { results[idx] = null; }
         remaining--;
-        if(remaining === 0){ callback(results, failed); }
+        if(remaining === 0){ callback(results, false); }
       });
     })(i);
   }
 }
 
-/* ============================================================
-   SPEECH — Samantha (EN) + Lesya (UK)
-   ============================================================ */
+/* Speech synthesis */
 function speak(text, lang){
   try {
     if(!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(text);
-    var t = (lang || 'en').toLowerCase();
-    u.lang = t === 'uk' ? 'uk-UA' : 'en-US';
+    var tg = (lang || 'en').toLowerCase();
+    u.lang = tg === 'uk' ? 'uk-UA' : 'en-US';
     u.rate = 0.9;
     u.pitch = 1.0;
     var voices = window.speechSynthesis.getVoices() || [];
-    var preferred = t === 'uk' ? 'Lesya' : 'Samantha';
+    var preferred = tg === 'uk' ? 'Lesya' : 'Samantha';
     var chosen = null;
     for(var i=0;i<voices.length;i++){
       if(voices[i].name && voices[i].name.indexOf(preferred) === 0){ chosen = voices[i]; break; }
@@ -401,7 +428,7 @@ function speak(text, lang){
     if(!chosen){
       for(var j=0;j<voices.length;j++){
         var v = voices[j];
-        if(v.lang && v.lang.toLowerCase().indexOf(t) === 0){ chosen = v; break; }
+        if(v.lang && v.lang.toLowerCase().indexOf(tg) === 0){ chosen = v; break; }
       }
     }
     if(chosen) u.voice = chosen;
@@ -411,12 +438,66 @@ function speak(text, lang){
 if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = function(){}; }
 
 /* ============================================================
+   PHONETIC FUZZY MATCH for speaking questions
+   ============================================================ */
+function phonetize(word){
+  var s = String(word || '').toLowerCase().trim();
+  /* remove non-letters */
+  s = s.replace(/[^a-z]/g, '');
+  /* common substitutions for accents */
+  s = s.replace(/ph/g, 'f');
+  s = s.replace(/th/g, 't');
+  s = s.replace(/ck/g, 'k');
+  s = s.replace(/c(?=[eiy])/g, 's');   /* soft c → s */
+  s = s.replace(/c/g, 'k');            /* hard c → k */
+  s = s.replace(/w/g, 'v');            /* w → v (common Ukrainian accent) */
+  s = s.replace(/q/g, 'k');
+  s = s.replace(/x/g, 'ks');
+  s = s.replace(/y/g, 'i');
+  s = s.replace(/ee/g, 'i');
+  s = s.replace(/ea/g, 'i');
+  s = s.replace(/oo/g, 'u');
+  s = s.replace(/ou/g, 'u');
+  /* collapse double letters */
+  s = s.replace(/(.)\1+/g, '$1');
+  /* drop silent trailing e */
+  s = s.replace(/e$/, '');
+  /* drop h after consonant */
+  s = s.replace(/([bcdfgklmnprstvz])h/g, '$1');
+  return s;
+}
+
+function phoneticallyEqual(a, b){
+  var pa = phonetize(a);
+  var pb = phonetize(b);
+  if(!pa || !pb) return false;
+  if(pa === pb) return true;
+  /* allow 1-char edit distance on phonetic form */
+  return levenshtein(pa, pb) <= 1;
+}
+
+function levenshtein(a, b){
+  var m = a.length, n = b.length;
+  if(!m) return n;
+  if(!n) return m;
+  var d = [];
+  for(var i=0;i<=m;i++){ d[i] = [i]; }
+  for(var j=0;j<=n;j++){ d[0][j] = j; }
+  for(var i2=1;i2<=m;i2++){
+    for(var j2=1;j2<=n;j2++){
+      var cost = a[i2-1] === b[j2-1] ? 0 : 1;
+      d[i2][j2] = Math.min(d[i2-1][j2]+1, d[i2][j2-1]+1, d[i2-1][j2-1]+cost);
+    }
+  }
+  return d[m][n];
+}
+
+/* ============================================================
    STATE
    ============================================================ */
 var STATE_KEY = 'learny_v1';
 var prefs = { uiLang:'uk', learnLang:'en' };
 var state = { completed:0, xp:0, gems:50, streak:1 };
-var devUnlocked = false;
 var devTapCount = 0;
 var devTapTimer = null;
 
@@ -511,6 +592,8 @@ var currentLessonIndex = -1;
 var qIndex = 0;
 var selected = null;
 var checked = false;
+var voiceRetries = 0;
+var recognition = null;
 
 function startLesson(index){
   currentLessonIndex = index;
@@ -518,6 +601,7 @@ function startLesson(index){
   qIndex = 0;
   selected = null;
   checked = false;
+  voiceRetries = 0;
 
   elHome.style.display = 'none';
   elDict.classList.remove('active');
@@ -531,9 +615,8 @@ function startLesson(index){
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
 
-  translateBatch(currentLesson.words, function(results, failed){
+  translateBatch(currentLesson.words, function(results){
     var pairs = results.filter(function(r){ return r; });
-    /* need at least 12 valid pairs to build 18 questions (9 words × 2) */
     if(pairs.length < 9){
       area.innerHTML = '<div class="loading"><div style="font-size:48px">📡</div><div>' + t('dictError') + '</div><button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button></div>';
       return;
@@ -550,48 +633,59 @@ function shuffle(a){
 }
 
 function buildQuestions(pairs){
-  /* pick 9 random words from the 15 */
-  var pool = shuffle(pairs).slice(0, 9);
+  /* choose 9 random words for the MC portion */
+  var pool = shuffle(pairs).slice(0, Math.min(9, pairs.length));
   var qs = [];
 
-  for(var w=0;w<pool.length;w++){
+  /* 8 MC questions from first 4 words (both directions each) */
+  for(var w=0;w<Math.min(4, pool.length);w++){
     var en = pool[w].en;
     var uk = pool[w].uk;
-
-    /* EN → UK */
     var otherUk = [];
     for(var a=0;a<pool.length;a++){ if(a !== w && pool[a].uk !== uk) otherUk.push(pool[a].uk); }
     otherUk = shuffle(otherUk).slice(0,3);
     if(otherUk.length === 3){
-      qs.push({ type:'mc', q:'Що означає "' + en + '"?', options: shuffle([uk].concat(otherUk)), answerText: uk });
+      qs.push({ type:'mc', q: prefs.uiLang === 'uk' ? 'Що означає "' + en + '"?' : 'What does "' + en + '" mean?', options: shuffle([uk].concat(otherUk)), answerText: uk });
     }
-
-    /* UK → EN */
     var otherEn = [];
     for(var b=0;b<pool.length;b++){ if(b !== w && pool[b].en !== en) otherEn.push(pool[b].en); }
     otherEn = shuffle(otherEn).slice(0,3);
     if(otherEn.length === 3){
-      qs.push({ type:'mc', q:'Яке слово означає "' + uk + '"?', options: shuffle([en].concat(otherEn)), answerText: en });
+      qs.push({ type:'mc', q: prefs.uiLang === 'uk' ? 'Яке слово означає "' + uk + '"?' : 'Which word means "' + uk + '"?', options: shuffle([en].concat(otherEn)), answerText: en });
     }
   }
 
-  /* trim to 15 MC questions max, then add 3 voice questions */
-  qs = shuffle(qs).slice(0, 15);
-
-  /* pick 3 random words for voice questions (from full pairs, not just pool) */
-  var voicePool = shuffle(pairs).slice(0, 3);
-  for(var v=0;v<voicePool.length;v++){
-    var vEn = voicePool[v].en;
-    var vUk = voicePool[v].uk;
-    var vOthers = [];
-    for(var c=0;c<pairs.length;c++){ if(pairs[c].en !== vEn) vOthers.push(pairs[c].en); }
-    vOthers = shuffle(vOthers).slice(0,3);
-    if(vOthers.length === 3){
-      qs.push({ type:'voice', q:t('listenPick'), speak:vEn, speakLang:'en', options: shuffle([vEn].concat(vOthers)), answerText: vEn });
+  /* 4 voice questions from words 4-8 */
+  var voiceWords = shuffle(pool.slice(4)).slice(0,4);
+  for(var v=0;v<voiceWords.length;v++){
+    var vEn = voiceWords[v].en;
+    var others = [];
+    for(var c=0;c<pairs.length;c++){ if(pairs[c].en !== vEn) others.push(pairs[c].en); }
+    others = shuffle(others).slice(0,3);
+    if(others.length === 3){
+      qs.push({ type:'voice', q: t('listenPick'), speak:vEn, speakLang:'en', options: shuffle([vEn].concat(others)), answerText: vEn });
     }
   }
 
-  /* shuffle everything so voice is interleaved */
+  /* 4 reading questions (EN phrase → pick Ukrainian) */
+  var readWords = shuffle(pool).slice(0,4);
+  for(var r=0;r<readWords.length;r++){
+    var rEn = readWords[r].en;
+    var rUk = readWords[r].uk;
+    var others2 = [];
+    for(var d=0;d<pairs.length;d++){ if(pairs[d].uk !== rUk) others2.push(pairs[d].uk); }
+    others2 = shuffle(others2).slice(0,3);
+    if(others2.length === 3){
+      qs.push({ type:'reading', q: t('readPick'), phrase: rEn, options: shuffle([rUk].concat(others2)), answerText: rUk });
+    }
+  }
+
+  /* 2 speaking questions */
+  var speakWords = shuffle(pool).slice(0,2);
+  for(var s=0;s<speakWords.length;s++){
+    qs.push({ type:'speaking', q: t('sayWord'), speakWord: speakWords[s].en, answerText: speakWords[s].en });
+  }
+
   currentLesson.questions = shuffle(qs);
 }
 
@@ -600,6 +694,7 @@ function renderQuestion(){
   document.getElementById('lessonProgress').style.width = ((qIndex + 1) / currentLesson.questions.length * 100) + '%';
   var area = document.getElementById('questionArea');
   area.innerHTML = '';
+  voiceRetries = 0;
 
   if(q.type === 'voice'){
     var srow = document.createElement('div');
@@ -613,29 +708,84 @@ function renderQuestion(){
     setTimeout(function(){ speak(q.speak, q.speakLang || 'en'); }, 350);
   }
 
+  if(q.type === 'reading'){
+    var prow = document.createElement('div');
+    prow.className = 'speaker-row';
+    var pspk = document.createElement('button');
+    pspk.className = 'speaker-btn';
+    pspk.innerHTML = '🔊';
+    pspk.onclick = function(){ speak(q.phrase, 'en'); };
+    prow.appendChild(pspk);
+    area.appendChild(prow);
+  }
+
+  if(q.type === 'speaking'){
+    var mrow = document.createElement('div');
+    mrow.className = 'mic-row';
+    var wordDiv = document.createElement('div');
+    wordDiv.style.fontSize = '36px';
+    wordDiv.style.fontWeight = '900';
+    wordDiv.style.color = '#0f172a';
+    wordDiv.style.letterSpacing = '1px';
+    wordDiv.textContent = q.speakWord;
+    mrow.appendChild(wordDiv);
+
+    var hearBtn = document.createElement('button');
+    hearBtn.className = 'speaker-btn';
+    hearBtn.style.width = '70px';
+    hearBtn.style.height = '70px';
+    hearBtn.style.fontSize = '30px';
+    hearBtn.innerHTML = '🔊';
+    hearBtn.onclick = function(){ speak(q.speakWord, 'en'); };
+    mrow.appendChild(hearBtn);
+
+    var mic = document.createElement('button');
+    mic.className = 'mic-btn';
+    mic.id = 'micBtn';
+    mic.innerHTML = '🎤';
+    mic.onclick = function(){ startListening(q); };
+    mrow.appendChild(mic);
+
+    var status = document.createElement('div');
+    status.className = 'mic-status';
+    status.id = 'micStatus';
+    status.textContent = t('tapToSpeak');
+    mrow.appendChild(status);
+
+    var heard = document.createElement('div');
+    heard.className = 'mic-heard';
+    heard.id = 'micHeard';
+    mrow.appendChild(heard);
+
+    area.appendChild(mrow);
+  }
+
   var qt = document.createElement('div');
-  qt.className = 'question' + (q.type === 'voice' ? ' small' : '');
+  qt.className = 'question' + (q.type === 'voice' || q.type === 'reading' ? ' small' : '');
+  if(q.type === 'speaking') qt.style.display = 'none';
   qt.id = 'questionText';
   qt.textContent = q.q;
   area.appendChild(qt);
 
-  var box = document.createElement('div');
-  box.className = 'options';
-  box.id = 'optionsBox';
-  for(var i=0;i<q.options.length;i++){
-    var opt = document.createElement('button');
-    opt.className = 'option';
-    opt.textContent = q.options[i];
-    (function(txt, el){ el.onclick = function(){ selectOption(txt, el); }; })(q.options[i], opt);
-    box.appendChild(opt);
+  if(q.options && q.options.length){
+    var box = document.createElement('div');
+    box.className = 'options';
+    box.id = 'optionsBox';
+    for(var i=0;i<q.options.length;i++){
+      var opt = document.createElement('button');
+      opt.className = 'option';
+      opt.textContent = q.options[i];
+      (function(txt, el){ el.onclick = function(){ selectOption(txt, el); }; })(q.options[i], opt);
+      box.appendChild(opt);
+    }
+    area.appendChild(box);
   }
-  area.appendChild(box);
 
   document.getElementById('feedback').textContent = '';
   document.getElementById('feedback').className = 'feedback';
   var btn = document.getElementById('mainBtn');
   btn.textContent = t('check');
-  btn.disabled = true;
+  btn.disabled = (q.type !== 'speaking');
   btn.className = 'btn';
   selected = null;
   checked = false;
@@ -650,8 +800,112 @@ function selectOption(text, el){
   document.getElementById('mainBtn').disabled = false;
 }
 
+/* ============================================================
+   SPEECH RECOGNITION for speaking questions
+   ============================================================ */
+function startListening(q){
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    document.getElementById('micStatus').textContent = t('notSupported');
+    /* fallback: mark as correct after 2 sec */
+    setTimeout(function(){ handleSpeakingSuccess(q, '(пропущено)'); }, 2000);
+    return;
+  }
+  var rec = new SR();
+  rec.lang = 'en-US';
+  rec.interimResults = false;
+  rec.maxAlternatives = 5;
+  rec.continuous = false;
+
+  var mic = document.getElementById('micBtn');
+  var status = document.getElementById('micStatus');
+  var heard = document.getElementById('micHeard');
+
+  mic.classList.add('listening');
+  status.textContent = t('listening');
+  heard.textContent = '';
+
+  var finished = false;
+
+  rec.onresult = function(event){
+    if(finished) return;
+    finished = true;
+    mic.classList.remove('listening');
+    var results = event.results[0];
+    var all = [];
+    for(var i=0;i<results.length;i++){ all.push(results[i].transcript.trim().toLowerCase()); }
+    heard.textContent = t('youSaid') + ' "' + all[0] + '"';
+    /* check all alternates phonetically */
+    var matched = false;
+    for(var a=0;a<all.length;a++){
+      if(phoneticallyEqual(all[a], q.speakWord)){ matched = true; break; }
+    }
+    if(matched){
+      handleSpeakingSuccess(q, all[0]);
+    } else {
+      voiceRetries++;
+      if(voiceRetries >= 3){
+        status.textContent = '❌ Правильно: ' + q.speakWord;
+        setTimeout(function(){ handleSpeakingSuccess(q, all[0] || '(—)'); }, 1200);
+      } else {
+        status.textContent = t('tryAgain') + ' (' + (3 - voiceRetries) + ')';
+        var fb = document.getElementById('feedback');
+        fb.textContent = t('wrong');
+        fb.className = 'feedback bad';
+      }
+    }
+  };
+
+  rec.onerror = function(event){
+    if(finished) return;
+    finished = true;
+    mic.classList.remove('listening');
+    status.textContent = t('tryAgain');
+    voiceRetries++;
+    if(voiceRetries >= 3){
+      setTimeout(function(){ handleSpeakingSuccess(q, '(помилка)'); }, 800);
+    }
+  };
+
+  rec.onend = function(){
+    if(finished) return;
+    finished = true;
+    mic.classList.remove('listening');
+    if(!document.getElementById('micHeard').textContent){
+      status.textContent = t('tryAgain');
+      voiceRetries++;
+      if(voiceRetries >= 3){
+        setTimeout(function(){ handleSpeakingSuccess(q, '(тиша)'); }, 800);
+      }
+    }
+  };
+
+  recognition = rec;
+  try { rec.start(); } catch(e){
+    mic.classList.remove('listening');
+    status.textContent = t('tryAgain');
+  }
+}
+
+function handleSpeakingSuccess(q, heardText){
+  var fb = document.getElementById('feedback');
+  fb.textContent = t('correct');
+  fb.className = 'feedback ok';
+  var btn = document.getElementById('mainBtn');
+  btn.className = 'btn correct';
+  btn.textContent = t('cont');
+  btn.disabled = false;
+  checked = true;
+}
+
 function handleMainBtn(){
   var q = currentLesson.questions[qIndex];
+
+  if(q.type === 'speaking'){
+    /* button acts as "continue" only after speaking done */
+    if(checked){ advanceQuestion(); }
+    return;
+  }
 
   if(!checked){
     checked = true;
@@ -677,21 +931,25 @@ function handleMainBtn(){
     }
     btn.textContent = t('cont');
   } else {
-    if(qIndex < currentLesson.questions.length - 1){
-      qIndex++;
-      renderQuestion();
-    } else {
-      state.completed = Math.max(state.completed, currentLessonIndex + 1);
-      var gained = 30 + Math.round(currentLesson.questions.length / 2);
-      state.xp += gained;
-      state.gems += 15;
-      saveState();
-      var title = prefs.uiLang === 'uk' ? currentLesson.uk : currentLesson.en;
-      document.getElementById('completeTitle').textContent = title;
-      document.getElementById('xpGained').textContent = gained;
-      elLesson.classList.remove('active');
-      elComplete.classList.add('active');
-    }
+    advanceQuestion();
+  }
+}
+
+function advanceQuestion(){
+  if(qIndex < currentLesson.questions.length - 1){
+    qIndex++;
+    renderQuestion();
+  } else {
+    state.completed = Math.max(state.completed, currentLessonIndex + 1);
+    var gained = 30 + Math.round(currentLesson.questions.length / 2);
+    state.xp += gained;
+    state.gems += 15;
+    saveState();
+    var title = prefs.uiLang === 'uk' ? currentLesson.uk : currentLesson.en;
+    document.getElementById('completeTitle').textContent = title;
+    document.getElementById('xpGained').textContent = gained;
+    elLesson.classList.remove('active');
+    elComplete.classList.add('active');
   }
 }
 
@@ -774,7 +1032,6 @@ document.getElementById('logoBtn').addEventListener('click', function(){
     devTapCount = 0;
     var answer = prompt('6?');
     if(answer === '7'){
-      devUnlocked = true;
       document.getElementById('devBtn').classList.remove('hidden');
       alert('Dev tools unlocked 🔧');
     }
@@ -791,7 +1048,7 @@ function closeDevPanel(){ elDev.classList.remove('active'); }
 function buildUnlockChips(){
   var cont = document.getElementById('unlockChips');
   cont.innerHTML = '';
-  var options = [5, 10, 15, 20, THEMES.length];
+  var options = [5, 10, 15, 20, 25, THEMES.length];
   for(var i=0;i<options.length;i++){
     (function(n){
       var chip = document.createElement('button');
@@ -827,7 +1084,6 @@ function devReset(){
   document.getElementById('devStatus').textContent = '🔄 Прогрес скинуто';
 }
 function lockDev(){
-  devUnlocked = false;
   document.getElementById('devBtn').classList.add('hidden');
   closeDevPanel();
 }

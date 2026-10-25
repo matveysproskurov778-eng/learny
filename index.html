@@ -15,13 +15,18 @@
   html,body{height:100%;overflow:hidden;overscroll-behavior:none}
   body{background:#f0fbff;color:#0f172a;display:flex;flex-direction:column;user-select:none}
 
+  /* SVG Icon defaults */
+  svg.icon { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; }
+  .icon-lg { width: 28px; height: 28px; stroke-width: 2.2; }
+  .icon-xl { width: 48px; height: 48px; stroke-width: 1.8; }
+  .icon-logo { width: 26px; height: 26px; stroke-width: 2.2; margin-right: 4px; }
+
   /* ===== TOPBAR ===== */
   .topbar{background:linear-gradient(135deg,#06b6d4 0%,#0ea5e9 100%);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px;flex-shrink:0;box-shadow:0 4px 20px rgba(6,182,212,.35),0 1px 0 rgba(255,255,255,.15) inset}
-  .logo{font-weight:900;font-size:18px;letter-spacing:-.3px;flex-shrink:0;display:flex;align-items:center;gap:6px;cursor:pointer;-webkit-user-select:none;user-select:none;text-shadow:0 1px 2px rgba(0,0,0,.15)}
-  .logo .snake{font-size:22px;transform:scaleX(-1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.2))}
+  .logo{font-weight:900;font-size:18px;letter-spacing:-.3px;flex-shrink:0;display:flex;align-items:center;cursor:pointer;text-shadow:0 1px 2px rgba(0,0,0,.15)}
   .pills{flex:1;display:flex;justify-content:center;gap:6px;min-width:0}
-  .pill{background:rgba(255,255,255,.25);padding:5px 10px;border-radius:30px;font-weight:800;font-size:12px;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 6px rgba(0,0,0,.08)}
-  .iconbtn{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.28);color:#fff;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:.15s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .pill{background:rgba(255,255,255,.25);padding:5px 10px;border-radius:30px;font-weight:800;font-size:12px;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 6px rgba(0,0,0,.08);display:flex;align-items:center;gap:4px}
+  .iconbtn{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.28);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 6px rgba(0,0,0,.08)}
   .iconbtn:active{background:rgba(255,255,255,.42);transform:scale(.9)}
   .iconbtn.hidden{display:none}
 
@@ -44,7 +49,7 @@
   .lesson-card.done{border-color:rgba(6,182,212,.3);background:linear-gradient(135deg,#ecfeff 0%,#f0fbff 100%)}
   .lesson-card.locked{opacity:.5;cursor:not-allowed;box-shadow:0 2px 6px rgba(15,23,42,.04);background:#f8fafc}
   .lesson-card.locked:hover{transform:none;box-shadow:0 2px 6px rgba(15,23,42,.04)}
-  .lesson-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;box-shadow:0 4px 10px rgba(6,182,212,.35),0 2px 0 rgba(8,145,178,.6) inset,0 -2px 0 rgba(255,255,255,.2) inset;position:relative}
+  .lesson-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;box-shadow:0 4px 10px rgba(6,182,212,.35),0 2px 0 rgba(8,145,178,.6) inset,0 -2px 0 rgba(255,255,255,.2) inset;position:relative}
   .lesson-icon::after{content:'';position:absolute;top:6px;left:8px;right:8px;height:12px;background:linear-gradient(180deg,rgba(255,255,255,.35),transparent);border-radius:50%;pointer-events:none}
   .lesson-icon.done{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 10px rgba(34,197,94,.35),0 2px 0 rgba(21,128,61,.6) inset,0 -2px 0 rgba(255,255,255,.2) inset}
   .lesson-icon.locked{background:linear-gradient(135deg,#cbd5e1,#94a3b8);box-shadow:0 3px 6px rgba(148,163,184,.3),0 2px 0 rgba(100,116,139,.4) inset}
@@ -52,7 +57,7 @@
   .lesson-info{flex:1;min-width:0;position:relative;z-index:1}
   .lesson-info h3{font-size:16px;font-weight:800;color:#0f172a;margin-bottom:3px;letter-spacing:-.2px}
   .lesson-info p{color:#64748b;font-size:12px;font-weight:600}
-  .lesson-arrow{color:#06b6d4;font-size:22px;font-weight:700;flex-shrink:0;position:relative;z-index:1}
+  .lesson-arrow{color:#06b6d4;flex-shrink:0;position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
   .lesson-card.locked .lesson-arrow{color:#94a3b8}
 
   /* ===== LESSON VIEW ===== */
@@ -60,7 +65,7 @@
   .lesson-view.active{display:flex;animation:slidein .3s cubic-bezier(.2,.9,.4,1.1)}
   @keyframes slidein{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
   .lesson-top{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-shrink:0}
-  .close-btn{font-size:22px;color:#94a3b8;cursor:pointer;font-weight:900;background:rgba(255,255,255,.9);border:1px solid rgba(148,163,184,.15);width:36px;height:36px;border-radius:50%;padding:0;font-family:inherit;transition:.15s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(15,23,42,.06)}
+  .close-btn{color:#94a3b8;cursor:pointer;background:rgba(255,255,255,.9);border:1px solid rgba(148,163,184,.15);width:36px;height:36px;border-radius:50%;padding:0;transition:.15s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(15,23,42,.06)}
   .close-btn:active{transform:scale(.92);background:#f1f5f9}
   .prog-bg{flex:1;height:16px;background:rgba(148,163,184,.15);border-radius:20px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04) inset}
   .prog-fill{height:100%;background:linear-gradient(90deg,#06b6d4,#0ea5e9);border-radius:20px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0;box-shadow:0 0 8px rgba(6,182,212,.5),0 -1px 0 rgba(255,255,255,.3) inset}
@@ -71,7 +76,7 @@
 
   /* Speaker button */
   .speaker-row{display:flex;justify-content:center;margin-bottom:24px}
-  .speaker-btn{width:120px;height:120px;border-radius:50%;border:none;background:linear-gradient(160deg,#22d3ee,#0891b2);color:#fff;font-size:52px;cursor:pointer;font-family:inherit;transition:.12s;box-shadow:0 8px 20px rgba(6,182,212,.4),0 4px 0 #0e7490 inset,0 -4px 0 rgba(255,255,255,.25) inset;position:relative;overflow:hidden}
+  .speaker-btn{width:110px;height:110px;border-radius:50%;border:none;background:linear-gradient(160deg,#22d3ee,#0891b2);color:#fff;cursor:pointer;transition:.12s;box-shadow:0 8px 20px rgba(6,182,212,.4),0 4px 0 #0e7490 inset,0 -4px 0 rgba(255,255,255,.25) inset;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
   .speaker-btn::after{content:'';position:absolute;top:8px;left:14px;right:14px;height:20px;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent);border-radius:50% 50% 40% 40%;pointer-events:none}
   .speaker-btn:active{transform:translateY(4px);box-shadow:0 4px 10px rgba(6,182,212,.4),0 2px 0 #0e7490 inset,0 -2px 0 rgba(255,255,255,.25) inset}
 
@@ -90,10 +95,6 @@
   .option.wrong::before{background:#ef4444;opacity:1}
   .option.disabled{pointer-events:none}
 
-  /* Loading */
-  .loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#64748b;font-weight:700}
-  .loading-spinner{width:56px;height:56px;border-radius:50%;border:4px solid rgba(6,182,212,.15);border-top-color:#06b6d4;border-right-color:#0ea5e9;animation:spin 1s linear infinite;box-shadow:0 0 20px rgba(6,182,212,.2)}
-
   /* Footer / button */
   .footer{margin-top:auto;padding-top:18px;display:flex;justify-content:flex-end;align-items:center;gap:16px;border-top:1px solid rgba(6,182,212,.08);flex-shrink:0}
   .feedback{font-weight:900;font-size:17px;margin-right:auto;display:flex;align-items:center;gap:6px}
@@ -111,7 +112,7 @@
   .shake{animation:shake .5s cubic-bezier(.4,0,.6,1)}
 
   /* Mic */
-  .mic-btn{width:140px;height:140px;border-radius:50%;border:none;background:linear-gradient(160deg,#fbbf24,#f59e0b);color:#fff;font-size:60px;cursor:pointer;font-family:inherit;transition:.12s;box-shadow:0 8px 20px rgba(245,158,11,.4),0 4px 0 #b45309 inset,0 -4px 0 rgba(255,255,255,.3) inset;position:relative;overflow:hidden}
+  .mic-btn{width:120px;height:120px;border-radius:50%;border:none;background:linear-gradient(160deg,#fbbf24,#f59e0b);color:#fff;cursor:pointer;transition:.12s;box-shadow:0 8px 20px rgba(245,158,11,.4),0 4px 0 #b45309 inset,0 -4px 0 rgba(255,255,255,.3) inset;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
   .mic-btn::after{content:'';position:absolute;top:10px;left:16px;right:16px;height:22px;background:linear-gradient(180deg,rgba(255,255,255,.4),transparent);border-radius:50% 50% 40% 40%;pointer-events:none}
   .mic-btn:active{transform:translateY(4px);box-shadow:0 4px 10px rgba(245,158,11,.4),0 2px 0 #b45309 inset,0 -2px 0 rgba(255,255,255,.3) inset}
   .mic-btn.listening{background:linear-gradient(160deg,#f87171,#dc2626);box-shadow:0 8px 20px rgba(239,68,68,.5),0 4px 0 #991b1b inset,0 -4px 0 rgba(255,255,255,.2) inset;animation:pulse 1.1s infinite}
@@ -131,20 +132,19 @@
   .dict-status{font-size:12px;color:#94a3b8;font-weight:700;margin:12px 2px 10px;min-height:16px}
   .dict-list{margin-top:4px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
   .dict-item{display:flex;align-items:center;gap:12px;padding:16px 18px;border:1px solid rgba(6,182,212,.1);border-radius:18px;margin-bottom:10px;background:#fff;animation:fadein .3s ease;box-shadow:0 2px 6px rgba(15,23,42,.04),0 6px 16px -6px rgba(6,182,212,.12)}
-  .dict-audio{width:44px;height:44px;border-radius:14px;border:none;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;font-family:inherit;transition:.12s;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .dict-audio{width:44px;height:44px;border-radius:14px;border:none;color:#fff;cursor:pointer;flex-shrink:0;transition:.12s;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .dict-audio::after{content:'';position:absolute;top:3px;left:5px;right:5px;height:7px;background:linear-gradient(180deg,rgba(255,255,255,.4),transparent);border-radius:50%;pointer-events:none}
   .dict-audio.en{background:linear-gradient(160deg,#22d3ee,#0891b2);box-shadow:0 3px 8px rgba(6,182,212,.3),0 2px 0 #0e7490 inset}
   .dict-audio.uk{background:linear-gradient(160deg,#fbbf24,#f59e0b);box-shadow:0 3px 8px rgba(245,158,11,.3),0 2px 0 #b45309 inset}
   .dict-audio:active{transform:translateY(2px);box-shadow:0 1px 3px rgba(6,182,212,.3),0 1px 0 #0e7490 inset}
   .dict-en{font-size:15px;font-weight:800;flex:1;color:#0f172a}
   .dict-uk{font-size:14px;font-weight:600;color:#64748b;flex:1;text-align:right}
-  .dict-badge{font-size:10px;font-weight:800;letter-spacing:.5px;background:linear-gradient(135deg,#ecfeff,#cffafe);color:#0891b2;padding:3px 8px;border-radius:8px;margin-left:6px;border:1px solid rgba(6,182,212,.15)}
 
   /* Complete */
   .complete{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:40px 24px;gap:10px;animation:fadein .4s ease;position:relative;overflow:hidden;background:linear-gradient(180deg,#f0fbff,#ffffff)}
   .complete::before{content:'';position:absolute;top:10%;left:50%;transform:translateX(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(6,182,212,.15),transparent 60%);border-radius:50%;pointer-events:none}
   .complete.active{display:flex}
-  .complete .emoji{font-size:72px;margin-bottom:8px;filter:drop-shadow(0 8px 16px rgba(6,182,212,.25));position:relative}
+  .complete .emoji-icon{color:#06b6d4;margin-bottom:8px;filter:drop-shadow(0 8px 16px rgba(6,182,212,.25));position:relative}
   .complete h1{font-size:32px;background:linear-gradient(135deg,#06b6d4,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;margin-top:6px;letter-spacing:-.5px}
   .complete p{font-size:15px;color:#64748b;font-weight:600}
   .complete .stats{display:flex;gap:22px;margin:26px 0 30px;font-weight:800;color:#475569;font-size:15px;position:relative}
@@ -184,15 +184,83 @@
 </head>
 <body>
 
+<!-- SVG ICON DEFINITIONS -->
+<svg style="display:none;">
+  <symbol id="i-snake" viewBox="0 0 24 24">
+    <path d="M21 11.5a3.5 3.5 0 0 0-7 0v3a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h6a3 3 0 0 0 3-3V1"/>
+    <path d="M3 12h6"/>
+    <circle cx="17.5" cy="11.5" r="0.5" fill="currentColor"/>
+  </symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24">
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+  </symbol>
+  <symbol id="i-gem" viewBox="0 0 24 24">
+    <path d="M6 3h12l4 6-10 12L2 9l4-6z"/>
+    <path d="M11 3 8 9l4 12 4-12-3-6"/>
+    <path d="M2 9h20"/>
+  </symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24">
+    <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+  </symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 24 24">
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+  </symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24">
+    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+    <line x1="12" y1="19" x2="12" y2="23"/>
+    <line x1="8" y1="23" x2="16" y2="23"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24">
+    <polyline points="9 18 15 12 9 6"/>
+  </symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24">
+    <polyline points="20 6 9 17 4 12"/>
+  </symbol>
+  <symbol id="i-x-circle" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+  </symbol>
+  <symbol id="i-party" viewBox="0 0 24 24">
+    <path d="M5.8 11.3 2 22l10.7-3.8"/>
+    <path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01M22 15h.01M9 15h.01M13 10h.01"/>
+    <path d="m7 15 2 2"/>
+  </symbol>
+</svg>
+
 <div class="topbar">
-  <div class="logo" id="logoBtn"><span class="snake">🐍</span> Learny</div>
-  <div class="pills">
-    <div class="pill">🔥 <span id="streakVal">1</span></div>
-    <div class="pill">💎 <span id="gemVal">50</span></div>
-    <div class="pill">⚡ <span id="xpVal">0</span></div>
+  <div class="logo" id="logoBtn">
+    <svg class="icon icon-logo"><use href="#i-snake"/></svg> Learny
   </div>
-  <button class="iconbtn hidden" id="devBtn" onclick="openDevPanel()">🔧</button>
-  <button class="iconbtn" onclick="toggleSettings()">⚙️</button>
+  <div class="pills">
+    <div class="pill"><svg class="icon" style="width:14px;height:14px"><use href="#i-fire"/></svg> <span id="streakVal">1</span></div>
+    <div class="pill"><svg class="icon" style="width:14px;height:14px"><use href="#i-gem"/></svg> <span id="gemVal">50</span></div>
+    <div class="pill"><svg class="icon" style="width:14px;height:14px"><use href="#i-bolt"/></svg> <span id="xpVal">0</span></div>
+  </div>
+  <button class="iconbtn hidden" id="devBtn" onclick="openDevPanel()"><svg class="icon"><use href="#i-tool"/></svg></button>
+  <button class="iconbtn" onclick="toggleSettings()"><svg class="icon"><use href="#i-settings"/></svg></button>
 </div>
 
 <div id="homeView" class="main">
@@ -212,7 +280,7 @@
 
 <div id="lessonView" class="lesson-view">
   <div class="lesson-top">
-    <button class="close-btn" onclick="exitLesson()">✕</button>
+    <button class="close-btn" onclick="exitLesson()"><svg class="icon"><use href="#i-x"/></svg></button>
     <div class="prog-bg"><div class="prog-fill" id="lessonProgress"></div></div>
   </div>
   <div class="question-card" id="questionArea"></div>
@@ -223,27 +291,27 @@
 </div>
 
 <div id="dictView" class="dict">
-  <h1>📖 Словник</h1>
-  <div class="sub" id="dictSub">Переклад онлайн · 🔊 = англійська · 🟠 = українська</div>
+  <h1 style="display:flex;align-items:center;gap:8px"><svg class="icon" style="width:28px;height:28px;color:#06b6d4"><use href="#i-book"/></svg> Словник</h1>
+  <div class="sub" id="dictSub">Переклад онлайн · синій = англійська · жовтий = українська</div>
   <input class="search" id="dictSearch" placeholder="Введіть слово..." oninput="onDictInput()">
   <div class="dict-status" id="dictStatus"></div>
   <div class="dict-list" id="dictList"></div>
 </div>
 
 <div id="completeView" class="complete">
-  <div class="emoji">🎉</div>
+  <svg class="icon icon-xl emoji-icon"><use href="#i-party"/></svg>
   <h1 id="completeH1">Урок завершено!</h1>
   <p id="completeTitle"></p>
   <div class="stats">
-    <span>⚡ +<span id="xpGained">50</span> XP</span>
-    <span>💎 +15</span>
+    <span><svg class="icon" style="width:18px;height:18px;color:#f59e0b"><use href="#i-bolt"/></svg> +<span id="xpGained">50</span> XP</span>
+    <span><svg class="icon" style="width:18px;height:18px;color:#06b6d4"><use href="#i-gem"/></svg> +15</span>
   </div>
   <button class="btn" onclick="backHome()" id="completeBtn">ПРОДОВЖИТИ</button>
 </div>
 
 <div class="settings" id="settingsModal" onclick="if(event.target===this)toggleSettings()">
   <div class="settings-panel" lang="uk">
-    <h2>⚙️ Налаштування</h2>
+    <h2><svg class="icon" style="color:#06b6d4"><use href="#i-settings"/></svg> Налаштування</h2>
     <label>МОВА ІНТЕРФЕЙСУ</label>
     <select id="uiLangSelect" lang="uk" onchange="setUILang(this.value)">
       <option value="uk">🇺🇦 Українська</option>
@@ -260,7 +328,7 @@
 
 <div class="settings" id="devModal" onclick="if(event.target===this)closeDevPanel()">
   <div class="dev-panel">
-    <h2>🔧 Dev Tools</h2>
+    <h2><svg class="icon" style="color:#06b6d4"><use href="#i-tool"/></svg> Dev Tools</h2>
     <div class="sub">Тільки для розробника</div>
     <label>РОЗБЛОКУВАТИ ДО УРОКУ</label>
     <div class="dev-row" id="unlockChips"></div>
@@ -277,28 +345,28 @@
 <script>
 var UI = {
   uk: { lessons:'уроків', check:'ПЕРЕВІРИТИ', cont:'ПРОДОВЖИТИ',
-        correct:'✅ Правильно!', wrong:'❌ Не зовсім', complete:'Урок завершено!',
+        correct:'Правильно!', wrong:'Не зовсім', complete:'Урок завершено!',
         locked:'Заблоковано', completed:'Пройдено', questions:'питань',
-        loading:'Завантаження перекладів...', loadingShort:'Хвилинку...',
+        loading:'Хвилинку...', loadingShort:'Хвилинку...',
         emptyDict:'Нічого не знайдено', dictHint:'Введіть слово англійською або українською',
         dictOnline:'переклад онлайн', dictCache:'з кешу', dictError:'Помилка мережі',
-        listenPick:'🎧 Прослухайте та виберіть, що почули:',
-        readPick:'📖 Прочитайте та виберіть переклад:',
-        sayWord:'🎤 Скажіть це слово:',
+        listenPick:'Прослухайте та виберіть, що почули:',
+        readPick:'Прочитайте та виберіть переклад:',
+        sayWord:'Скажіть це слово:',
         tapToSpeak:'Натисніть і говоріть',
         listening:'Слухаю...',
         youSaid:'Ми почули:',
         tryAgain:'Спробуйте ще',
         notSupported:'Мікрофон не підтримується' },
   en: { lessons:'lessons', check:'CHECK', cont:'CONTINUE',
-        correct:'✅ Correct!', wrong:'❌ Not quite', complete:'Lesson complete!',
+        correct:'Correct!', wrong:'Not quite', complete:'Lesson complete!',
         locked:'Locked', completed:'Completed', questions:'questions',
-        loading:'Loading translations...', loadingShort:'One moment...',
+        loading:'One moment...', loadingShort:'One moment...',
         emptyDict:'Nothing found', dictHint:'Type a word in English or Ukrainian',
         dictOnline:'online translation', dictCache:'from cache', dictError:'Network error',
-        listenPick:'🎧 Listen and pick what you heard:',
-        readPick:'📖 Read and pick the translation:',
-        sayWord:'🎤 Say this word:',
+        listenPick:'Listen and pick what you heard:',
+        readPick:'Read and pick the translation:',
+        sayWord:'Say this word:',
         tapToSpeak:'Tap and speak',
         listening:'Listening...',
         youSaid:'We heard:',
@@ -306,38 +374,139 @@ var UI = {
         notSupported:'Microphone not supported' }
 };
 
+/* HARDCODED VOCABULARY - NO MORE API HALLUCINATIONS */
 var THEMES = [
-  { uk:'Привітання', en:'Greetings', icon:'👋', words:['hello','hi','good morning','good afternoon','good evening','good night','goodbye','bye','see you','see you later','welcome','thank you','please','sorry','excuse me'] },
-  { uk:'Знайомство', en:'Introductions', icon:'🤝', words:['my name is','what is your name','nice to meet you','how are you','I am fine','where are you from','I am from Ukraine','I live in','how old are you','I am','this is','my friend','my family','I speak','I do not understand'] },
-  { uk:'Числа', en:'Numbers', icon:'🔢', words:['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','twenty','one hundred'] },
-  { uk:'Кольори', en:'Colors', icon:'🎨', words:['red','blue','green','yellow','orange','purple','pink','brown','black','white','grey','light','dark','bright','color'] },
-  { uk:'Тварини', en:'Animals', icon:'🐶', words:['cat','dog','bird','fish','horse','cow','pig','chicken','sheep','rabbit','mouse','bear','lion','elephant','animal'] },
-  { uk:'Сім\'я', en:'Family', icon:'👨‍👩‍👧', words:['mother','father','mom','dad','son','daughter','brother','sister','grandmother','grandfather','uncle','aunt','cousin','family','parents'] },
-  { uk:'Їжа', en:'Food', icon:'🍽️', words:['bread','cheese','meat','fish','egg','soup','rice','pasta','salad','butter','sugar','salt','cake','chocolate','food'] },
-  { uk:'Напої', en:'Drinks', icon:'🥤', words:['water','milk','tea','coffee','juice','wine','beer','soda','hot chocolate','lemonade','cup','glass','bottle','drink','thirsty'] },
-  { uk:'Фрукти й овочі', en:'Fruits & Veggies', icon:'🍎', words:['apple','banana','orange','lemon','strawberry','grape','peach','pear','potato','tomato','carrot','onion','cucumber','cabbage','vegetable'] },
-  { uk:'Час', en:'Time', icon:'🕐', words:['what time is it','hour','minute','second','morning','afternoon','evening','night','today','tomorrow','yesterday','now','later','soon','always'] },
-  { uk:'Дні тижня', en:'Days of Week', icon:'📅', words:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','week','weekend','day','weekday','next week','last week','every day','daily'] },
-  { uk:'Місяці', en:'Months', icon:'🗓️', words:['January','February','March','April','May','June','July','August','September','October','November','December','month','year','season'] },
-  { uk:'Погода', en:'Weather', icon:'⛅', words:['sun','rain','snow','wind','cloud','storm','hot','cold','warm','cool','sunny','rainy','snowy','weather','temperature'] },
-  { uk:'Одяг', en:'Clothes', icon:'👕', words:['shirt','pants','dress','skirt','shoes','boots','hat','coat','jacket','sweater','socks','gloves','scarf','belt','clothes'] },
-  { uk:'Тіло', en:'Body', icon:'🧍', words:['head','hair','face','eye','ear','nose','mouth','tooth','hand','arm','leg','foot','finger','heart','body'] },
-  { uk:'Дім', en:'House', icon:'🏠', words:['house','home','room','kitchen','bedroom','bathroom','living room','door','window','floor','wall','roof','garden','garage','apartment'] },
-  { uk:'Меблі', en:'Furniture', icon:'🪑', words:['table','chair','bed','sofa','shelf','lamp','mirror','desk','cupboard','carpet','curtain','pillow','blanket','drawer','furniture'] },
-  { uk:'Місто', en:'City', icon:'🏙️', words:['city','town','village','street','road','square','shop','market','school','hospital','bank','park','restaurant','cafe','church'] },
-  { uk:'Транспорт', en:'Transport', icon:'🚗', words:['car','bus','train','plane','bike','taxi','ship','boat','motorcycle','tram','ticket','station','airport','driver','travel'] },
-  { uk:'Професії', en:'Jobs', icon:'👷', words:['teacher','doctor','nurse','driver','cook','waiter','police officer','farmer','engineer','lawyer','singer','artist','writer','worker','job'] },
-  { uk:'Дієслова', en:'Basic Verbs', icon:'🏃', words:['eat','drink','sleep','go','come','see','look','hear','speak','say','read','write','work','play','live'] },
-  { uk:'Прикметники', en:'Adjectives', icon:'✨', words:['big','small','good','bad','new','old','beautiful','ugly','fast','slow','easy','hard','happy','sad','important'] },
-  { uk:'Емоції', en:'Feelings', icon:'😊', words:['happy','sad','angry','tired','hungry','thirsty','scared','excited','surprised','bored','love','hate','like','feel','feeling'] },
-  { uk:'Здоров\'я', en:'Health', icon:'💊', words:['health','doctor','medicine','pain','headache','stomachache','fever','cough','cold','sick','healthy','hospital','pharmacy','rest','tired'] },
-  { uk:'Подорожі', en:'Travel', icon:'✈️', words:['travel','trip','journey','ticket','passport','luggage','hotel','beach','mountain','sea','map','tourist','country','city','visit'] },
-  { uk:'Напрямки', en:'Directions', icon:'🧭', words:['left','right','up','down','forward','back','here','there','near','far','north','south','east','west','straight'] },
-  { uk:'Музика', en:'Music', icon:'🎵', words:['music','song','sing','dance','guitar','piano','drum','violin','listen','sound','melody','voice','loud','quiet','concert'] },
-  { uk:'Спорт', en:'Sports', icon:'⚽', words:['sport','football','basketball','tennis','swim','run','jump','play','win','lose','team','ball','game','player','coach'] },
-  { uk:'Технології', en:'Technology', icon:'💻', words:['computer','phone','internet','email','website','app','screen','keyboard','mouse','click','download','upload','password','account','message'] },
-  { uk:'Природа', en:'Nature', icon:'🌳', words:['tree','flower','grass','leaf','river','lake','sea','mountain','forest','sky','sun','moon','star','animal','bird'] }
+  { uk:'Привітання', en:'Greetings', icon:'👋', words:[
+    {en:'hello',uk:'привіт'},{en:'hi',uk:'привіт'},{en:'good morning',uk:'доброго ранку'},{en:'good afternoon',uk:'доброго дня'},{en:'good evening',uk:'доброго вечора'},{en:'good night',uk:'на добраніч'},{en:'goodbye',uk:'до побачення'},{en:'bye',uk:'до побачення'},{en:'see you',uk:'побачимось'},{en:'see you later',uk:'до зустрічі'},{en:'welcome',uk:'вітаю'},{en:'thank you',uk:'дякую'},{en:'please',uk:'будь ласка'},{en:'sorry',uk:'вибачте'},{en:'excuse me',uk:'перепрошую'}
+  ]},
+  { uk:'Знайомство', en:'Introductions', icon:'🤝', words:[
+    {en:'my name is',uk:'мене звати'},{en:'what is your name',uk:'як тебе звати'},{en:'nice to meet you',uk:'приємно познайомитись'},{en:'how are you',uk:'як справи'},{en:'I am fine',uk:'я в порядку'},{en:'where are you from',uk:'звідки ти'},{en:'I am from Ukraine',uk:'я з України'},{en:'I live in',uk:'я живу в'},{en:'how old are you',uk:'скільки тобі років'},{en:'I am',uk:'я є'},{en:'this is',uk:'це є'},{en:'my friend',uk:'мій друг'},{en:'my family',uk:'моя сім\'я'},{en:'I speak',uk:'я розмовляю'},{en:'I do not understand',uk:'я не розумію'}
+  ]},
+  { uk:'Числа', en:'Numbers', icon:'🔢', words:[
+    {en:'one',uk:'один'},{en:'two',uk:'два'},{en:'three',uk:'три'},{en:'four',uk:'чотири'},{en:'five',uk:'п\'ять'},{en:'six',uk:'шість'},{en:'seven',uk:'сім'},{en:'eight',uk:'вісім'},{en:'nine',uk:'дев\'ять'},{en:'ten',uk:'десять'},{en:'eleven',uk:'одинадцять'},{en:'twelve',uk:'дванадцять'},{en:'thirteen',uk:'тринадцять'},{en:'twenty',uk:'двадцять'},{en:'one hundred',uk:'сто'}
+  ]},
+  { uk:'Кольори', en:'Colors', icon:'🎨', words:[
+    {en:'red',uk:'червоний'},{en:'blue',uk:'синій'},{en:'green',uk:'зелений'},{en:'yellow',uk:'жовтий'},{en:'orange',uk:'помаранчевий'},{en:'purple',uk:'фіолетовий'},{en:'pink',uk:'рожевий'},{en:'brown',uk:'коричневий'},{en:'black',uk:'чорний'},{en:'white',uk:'білий'},{en:'grey',uk:'сірий'},{en:'light',uk:'світлий'},{en:'dark',uk:'темний'},{en:'bright',uk:'яскравий'},{en:'color',uk:'колір'}
+  ]},
+  { uk:'Тварини', en:'Animals', icon:'🐶', words:[
+    {en:'cat',uk:'кіт'},{en:'dog',uk:'пес'},{en:'bird',uk:'птах'},{en:'fish',uk:'риба'},{en:'horse',uk:'кінь'},{en:'cow',uk:'корова'},{en:'pig',uk:'свиня'},{en:'chicken',uk:'курка'},{en:'sheep',uk:'вівця'},{en:'rabbit',uk:'кролик'},{en:'mouse',uk:'миша'},{en:'bear',uk:'ведмідь'},{en:'lion',uk:'лев'},{en:'elephant',uk:'слон'},{en:'animal',uk:'тварина'}
+  ]},
+  { uk:'Сім\'я', en:'Family', icon:'👨‍👩‍👧', words:[
+    {en:'mother',uk:'мати'},{en:'father',uk:'батько'},{en:'mom',uk:'мама'},{en:'dad',uk:'тато'},{en:'son',uk:'син'},{en:'daughter',uk:'дочка'},{en:'brother',uk:'брат'},{en:'sister',uk:'сестра'},{en:'grandmother',uk:'бабуся'},{en:'grandfather',uk:'дідусь'},{en:'uncle',uk:'дядько'},{en:'aunt',uk:'тітка'},{en:'cousin',uk:'двоюрідний брат'},{en:'family',uk:'сім\'я'},{en:'parents',uk:'батьки'}
+  ]},
+  { uk:'Їжа', en:'Food', icon:'🍽️', words:[
+    {en:'bread',uk:'хліб'},{en:'cheese',uk:'сир'},{en:'meat',uk:'м\'ясо'},{en:'fish',uk:'риба'},{en:'egg',uk:'яйце'},{en:'soup',uk:'суп'},{en:'rice',uk:'рис'},{en:'pasta',uk:'макарони'},{en:'salad',uk:'салат'},{en:'butter',uk:'масло'},{en:'sugar',uk:'цукор'},{en:'salt',uk:'сіль'},{en:'cake',uk:'торт'},{en:'chocolate',uk:'шоколад'},{en:'food',uk:'їжа'}
+  ]},
+  { uk:'Напої', en:'Drinks', icon:'🥤', words:[
+    {en:'water',uk:'вода'},{en:'milk',uk:'молоко'},{en:'tea',uk:'чай'},{en:'coffee',uk:'кава'},{en:'juice',uk:'сік'},{en:'wine',uk:'вино'},{en:'beer',uk:'пиво'},{en:'soda',uk:'газована вода'},{en:'hot chocolate',uk:'гарячий шоколад'},{en:'lemonade',uk:'лимонад'},{en:'cup',uk:'чашка'},{en:'glass',uk:'склянка'},{en:'bottle',uk:'пляшка'},{en:'drink',uk:'напій'},{en:'thirsty',uk:'спраглий'}
+  ]},
+  { uk:'Фрукти й овочі', en:'Fruits & Veggies', icon:'🍎', words:[
+    {en:'apple',uk:'яблуко'},{en:'banana',uk:'банан'},{en:'orange',uk:'апельсин'},{en:'lemon',uk:'лимон'},{en:'strawberry',uk:'полуниця'},{en:'grape',uk:'виноград'},{en:'peach',uk:'персик'},{en:'pear',uk:'груша'},{en:'potato',uk:'картопля'},{en:'tomato',uk:'помідор'},{en:'carrot',uk:'морква'},{en:'onion',uk:'цибуля'},{en:'cucumber',uk:'огірок'},{en:'cabbage',uk:'капуста'},{en:'vegetable',uk:'овоч'}
+  ]},
+  { uk:'Час', en:'Time', icon:'🕐', words:[
+    {en:'what time is it',uk:'котра година'},{en:'hour',uk:'година'},{en:'minute',uk:'хвилина'},{en:'second',uk:'секунда'},{en:'morning',uk:'ранок'},{en:'afternoon',uk:'після обіду'},{en:'evening',uk:'вечір'},{en:'night',uk:'ніч'},{en:'today',uk:'сьогодні'},{en:'tomorrow',uk:'завтра'},{en:'yesterday',uk:'вчора'},{en:'now',uk:'зараз'},{en:'later',uk:'пізніше'},{en:'soon',uk:'скоро'},{en:'always',uk:'завжди'}
+  ]},
+  { uk:'Дні тижня', en:'Days of Week', icon:'📅', words:[
+    {en:'Monday',uk:'понеділок'},{en:'Tuesday',uk:'вівторок'},{en:'Wednesday',uk:'середа'},{en:'Thursday',uk:'четвер'},{en:'Friday',uk:'п\'ятниця'},{en:'Saturday',uk:'субота'},{en:'Sunday',uk:'неділя'},{en:'week',uk:'тиждень'},{en:'weekend',uk:'вихідні'},{en:'day',uk:'день'},{en:'weekday',uk:'будній день'},{en:'next week',uk:'наступний тиждень'},{en:'last week',uk:'минулий тиждень'},{en:'every day',uk:'щодня'},{en:'daily',uk:'щоденний'}
+  ]},
+  { uk:'Місяці', en:'Months', icon:'🗓️', words:[
+    {en:'January',uk:'січень'},{en:'February',uk:'лютий'},{en:'March',uk:'березень'},{en:'April',uk:'квітень'},{en:'May',uk:'травень'},{en:'June',uk:'червень'},{en:'July',uk:'липень'},{en:'August',uk:'серпень'},{en:'September',uk:'вересень'},{en:'October',uk:'жовтень'},{en:'November',uk:'листопад'},{en:'December',uk:'грудень'},{en:'month',uk:'місяць'},{en:'year',uk:'рік'},{en:'season',uk:'сезон'}
+  ]},
+  { uk:'Погода', en:'Weather', icon:'⛅', words:[
+    {en:'sun',uk:'сонце'},{en:'rain',uk:'дощ'},{en:'snow',uk:'сніг'},{en:'wind',uk:'вітер'},{en:'cloud',uk:'хмара'},{en:'storm',uk:'буря'},{en:'hot',uk:'спекотно'},{en:'cold',uk:'холодно'},{en:'warm',uk:'тепло'},{en:'cool',uk:'прохолодно'},{en:'sunny',uk:'сонячно'},{en:'rainy',uk:'дощово'},{en:'snowy',uk:'сніжно'},{en:'weather',uk:'погода'},{en:'temperature',uk:'температура'}
+  ]},
+  { uk:'Одяг', en:'Clothes', icon:'👕', words:[
+    {en:'shirt',uk:'сорочка'},{en:'pants',uk:'штани'},{en:'dress',uk:'сукня'},{en:'skirt',uk:'спідниця'},{en:'shoes',uk:'взуття'},{en:'boots',uk:'чоботи'},{en:'hat',uk:'капелюх'},{en:'coat',uk:'пальто'},{en:'jacket',uk:'куртка'},{en:'sweater',uk:'светр'},{en:'socks',uk:'шкарпетки'},{en:'gloves',uk:'рукавички'},{en:'scarf',uk:'шарф'},{en:'belt',uk:'ремінь'},{en:'clothes',uk:'одяг'}
+  ]},
+  { uk:'Тіло', en:'Body', icon:'🧍', words:[
+    {en:'head',uk:'голова'},{en:'hair',uk:'волосся'},{en:'face',uk:'обличчя'},{en:'eye',uk:'око'},{en:'ear',uk:'вухо'},{en:'nose',uk:'ніс'},{en:'mouth',uk:'рот'},{en:'tooth',uk:'зуб'},{en:'hand',uk:'рука'},{en:'arm',uk:'плече'},{en:'leg',uk:'нога'},{en:'foot',uk:'ступня'},{en:'finger',uk:'палець'},{en:'heart',uk:'серце'},{en:'body',uk:'тіло'}
+  ]},
+  { uk:'Дім', en:'House', icon:'🏠', words:[
+    {en:'house',uk:'дім'},{en:'home',uk:'домівка'},{en:'room',uk:'кімната'},{en:'kitchen',uk:'кухня'},{en:'bedroom',uk:'спальня'},{en:'bathroom',uk:'ванна кімната'},{en:'living room',uk:'вітальня'},{en:'door',uk:'двері'},{en:'window',uk:'вікно'},{en:'floor',uk:'підлога'},{en:'wall',uk:'стіна'},{en:'roof',uk:'дах'},{en:'garden',uk:'сад'},{en:'garage',uk:'гараж'},{en:'apartment',uk:'квартира'}
+  ]},
+  { uk:'Меблі', en:'Furniture', icon:'🪑', words:[
+    {en:'table',uk:'стіл'},{en:'chair',uk:'стілець'},{en:'bed',uk:'ліжко'},{en:'sofa',uk:'диван'},{en:'shelf',uk:'полиця'},{en:'lamp',uk:'лампа'},{en:'mirror',uk:'дзеркало'},{en:'desk',uk:'письмовий стіл'},{en:'cupboard',uk:'шафа'},{en:'carpet',uk:'килим'},{en:'curtain',uk:'штори'},{en:'pillow',uk:'подушка'},{en:'blanket',uk:'ковдра'},{en:'drawer',uk:'шухляда'},{en:'furniture',uk:'меблі'}
+  ]},
+  { uk:'Місто', en:'City', icon:'🏙️', words:[
+    {en:'city',uk:'місто'},{en:'town',uk:'містечко'},{en:'village',uk:'село'},{en:'street',uk:'вулиця'},{en:'road',uk:'дорога'},{en:'square',uk:'площа'},{en:'shop',uk:'магазин'},{en:'market',uk:'ринок'},{en:'school',uk:'школа'},{en:'hospital',uk:'лікарня'},{en:'bank',uk:'банк'},{en:'park',uk:'парк'},{en:'restaurant',uk:'ресторан'},{en:'cafe',uk:'кафе'},{en:'church',uk:'церква'}
+  ]},
+  { uk:'Транспорт', en:'Transport', icon:'🚗', words:[
+    {en:'car',uk:'машина'},{en:'bus',uk:'автобус'},{en:'train',uk:'потяг'},{en:'plane',uk:'літак'},{en:'bike',uk:'велосипед'},{en:'taxi',uk:'таксі'},{en:'ship',uk:'корабель'},{en:'boat',uk:'човен'},{en:'motorcycle',uk:'мотоцикл'},{en:'tram',uk:'трамвай'},{en:'ticket',uk:'квиток'},{en:'station',uk:'станція'},{en:'airport',uk:'аеропорт'},{en:'driver',uk:'водій'},{en:'travel',uk:'подорожувати'}
+  ]},
+  { uk:'Професії', en:'Jobs', icon:'👷', words:[
+    {en:'teacher',uk:'вчитель'},{en:'doctor',uk:'лікар'},{en:'nurse',uk:'медсестра'},{en:'driver',uk:'водій'},{en:'cook',uk:'кухар'},{en:'waiter',uk:'офіціант'},{en:'police officer',uk:'поліцейський'},{en:'farmer',uk:'фермер'},{en:'engineer',uk:'інженер'},{en:'lawyer',uk:'юрист'},{en:'singer',uk:'співак'},{en:'artist',uk:'художник'},{en:'writer',uk:'письменник'},{en:'worker',uk:'робітник'},{en:'job',uk:'робота'}
+  ]},
+  { uk:'Дієслова', en:'Basic Verbs', icon:'🏃', words:[
+    {en:'eat',uk:'їсти'},{en:'drink',uk:'пити'},{en:'sleep',uk:'спати'},{en:'go',uk:'йти'},{en:'come',uk:'приходити'},{en:'see',uk:'бачити'},{en:'look',uk:'дивитися'},{en:'hear',uk:'чути'},{en:'speak',uk:'говорити'},{en:'say',uk:'казати'},{en:'read',uk:'читати'},{en:'write',uk:'писати'},{en:'work',uk:'працювати'},{en:'play',uk:'грати'},{en:'live',uk:'жити'}
+  ]},
+  { uk:'Прикметники', en:'Adjectives', icon:'✨', words:[
+    {en:'big',uk:'великий'},{en:'small',uk:'малий'},{en:'good',uk:'добрий'},{en:'bad',uk:'поганий'},{en:'new',uk:'новий'},{en:'old',uk:'старий'},{en:'beautiful',uk:'гарний'},{en:'ugly',uk:'потворний'},{en:'fast',uk:'швидкий'},{en:'slow',uk:'повільний'},{en:'easy',uk:'легкий'},{en:'hard',uk:'важкий'},{en:'happy',uk:'щасливий'},{en:'sad',uk:'сумний'},{en:'important',uk:'важливий'}
+  ]},
+  { uk:'Емоції', en:'Feelings', icon:'😊', words:[
+    {en:'happy',uk:'щасливий'},{en:'sad',uk:'сумний'},{en:'angry',uk:'злий'},{en:'tired',uk:'втомлений'},{en:'hungry',uk:'голодний'},{en:'thirsty',uk:'спраглий'},{en:'scared',uk:'наляканий'},{en:'excited',uk:'схвильований'},{en:'surprised',uk:'здивований'},{en:'bored',uk:'нудьгуючий'},{en:'love',uk:'любов'},{en:'hate',uk:'ненавидіти'},{en:'like',uk:'подобатися'},{en:'feel',uk:'відчувати'},{en:'feeling',uk:'почуття'}
+  ]},
+  { uk:'Здоров\'я', en:'Health', icon:'💊', words:[
+    {en:'health',uk:'здоров\'я'},{en:'doctor',uk:'лікар'},{en:'medicine',uk:'ліки'},{en:'pain',uk:'біль'},{en:'headache',uk:'головний біль'},{en:'stomachache',uk:'біль у животі'},{en:'fever',uk:'температура'},{en:'cough',uk:'кашель'},{en:'cold',uk:'застуда'},{en:'sick',uk:'хворий'},{en:'healthy',uk:'здоровий'},{en:'hospital',uk:'лікарня'},{en:'pharmacy',uk:'аптека'},{en:'rest',uk:'відпочинок'},{en:'tired',uk:'втомлений'}
+  ]},
+  { uk:'Подорожі', en:'Travel', icon:'✈️', words:[
+    {en:'travel',uk:'подорож'},{en:'trip',uk:'поїздка'},{en:'journey',uk:'мандрівка'},{en:'ticket',uk:'квиток'},{en:'passport',uk:'паспорт'},{en:'luggage',uk:'багаж'},{en:'hotel',uk:'готель'},{en:'beach',uk:'пляж'},{en:'mountain',uk:'гора'},{en:'sea',uk:'море'},{en:'map',uk:'карта'},{en:'tourist',uk:'турист'},{en:'country',uk:'країна'},{en:'city',uk:'місто'},{en:'visit',uk:'відвідувати'}
+  ]},
+  { uk:'Напрямки', en:'Directions', icon:'🧭', words:[
+    {en:'left',uk:'ліворуч'},{en:'right',uk:'праворуч'},{en:'up',uk:'вгору'},{en:'down',uk:'вниз'},{en:'forward',uk:'вперед'},{en:'back',uk:'назад'},{en:'here',uk:'тут'},{en:'there',uk:'там'},{en:'near',uk:'близько'},{en:'far',uk:'далеко'},{en:'north',uk:'північ'},{en:'south',uk:'південь'},{en:'east',uk:'схід'},{en:'west',uk:'захід'},{en:'straight',uk:'прямо'}
+  ]},
+  { uk:'Музика', en:'Music', icon:'🎵', words:[
+    {en:'music',uk:'музика'},{en:'song',uk:'пісня'},{en:'sing',uk:'співати'},{en:'dance',uk:'танцювати'},{en:'guitar',uk:'гітара'},{en:'piano',uk:'піаніно'},{en:'drum',uk:'барабан'},{en:'violin',uk:'скрипка'},{en:'listen',uk:'слухати'},{en:'sound',uk:'звук'},{en:'melody',uk:'мелодія'},{en:'voice',uk:'голос'},{en:'loud',uk:'гучний'},{en:'quiet',uk:'тихий'},{en:'concert',uk:'концерт'}
+  ]},
+  { uk:'Спорт', en:'Sports', icon:'⚽', words:[
+    {en:'sport',uk:'спорт'},{en:'football',uk:'футбол'},{en:'basketball',uk:'баскетбол'},{en:'tennis',uk:'теніс'},{en:'swim',uk:'плавати'},{en:'run',uk:'бігати'},{en:'jump',uk:'стрибати'},{en:'play',uk:'грати'},{en:'win',uk:'перемагати'},{en:'lose',uk:'програвати'},{en:'team',uk:'команда'},{en:'ball',uk:'м\'яч'},{en:'game',uk:'гра'},{en:'player',uk:'гравець'},{en:'coach',uk:'тренер'}
+  ]},
+  { uk:'Технології', en:'Technology', icon:'💻', words:[
+    {en:'computer',uk:'комп\'ютер'},{en:'phone',uk:'телефон'},{en:'internet',uk:'інтернет'},{en:'email',uk:'електронна пошта'},{en:'website',uk:'вебсайт'},{en:'app',uk:'додаток'},{en:'screen',uk:'екран'},{en:'keyboard',uk:'клавіатура'},{en:'mouse',uk:'мишка'},{en:'click',uk:'клікати'},{en:'download',uk:'завантажувати'},{en:'upload',uk:'вивантажувати'},{en:'password',uk:'пароль'},{en:'account',uk:'акаунт'},{en:'message',uk:'повідомлення'}
+  ]},
+  { uk:'Природа', en:'Nature', icon:'🌳', words:[
+    {en:'tree',uk:'дерево'},{en:'flower',uk:'квітка'},{en:'grass',uk:'трава'},{en:'leaf',uk:'листок'},{en:'river',uk:'річка'},{en:'lake',uk:'озеро'},{en:'sea',uk:'море'},{en:'mountain',uk:'гора'},{en:'forest',uk:'ліс'},{en:'sky',uk:'небо'},{en:'sun',uk:'сонце'},{en:'moon',uk:'місяць'},{en:'star',uk:'зірка'},{en:'animal',uk:'тварина'},{en:'bird',uk:'птах'}
+  ]}
 ];
+
+/* Safe SVG replacement for theme icons */
+function getThemeSvg(iconEmoji){
+  return '<svg class="icon icon-lg"><use href="#i-book"/></svg>'; // Fallback if emoji mapping is too complex for now, but wait - let's use Lucide-like standard icons for themes to keep it clean.
+}
+
+// Let's create simple SVG representations for the 30 theme icons.
+// Since we want line-art, we'll build a dictionary mapping.
+var THEME_SVGS = {
+  'Привітання': '<path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 1 1 3 0m-3 6a1.5 1.5 0 0 0 3 0m0 0V5.5a1.5 1.5 0 1 1 3 0m-3 6a1.5 1.5 0 0 0 3 0m0 0v-3a1.5 1.5 0 1 1 3 0m-3 3a1.5 1.5 0 0 0 3 0m0 0v-1.5a1.5 1.5 0 1 1 3 0v4.5a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-1.5"/>',
+  'Знайомство': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'Числа': '<path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/>',
+  'Кольори': '<circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="20" r="2.5"/><path d="M12 22A10 10 0 0 1 2 12a10 10 0 0 1 10-10 10 10 0 0 1 10 10c0 2.5-2 4-4 4h-2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 1 2 2z"/>',
+  'Тварини': '<path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .09.78.503 1.446 1.103 1.985a8.404 8.404 0 0 0 1.373 1.014C4.012 13.664 3 15.651 3 17.5 3 20.538 7.029 23 12 23s9-2.462 9-5.5c0-1.849-1.012-3.836-1.976-4.501a8.404 8.404 0 0 0 1.373-1.014C21 11.446 21.41 10.78 21.5 10c.113-.994-1.177-6.53-4-7-1.923-.321-3.5.782-3.5 2.172"/><path d="M8 14v.01M16 14v.01M12 16v.01"/>',
+  'Сім\'я': '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'Їжа': '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  'Напої': '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>',
+  'Фрукти й овочі': '<path d="M12 2a5 5 0 0 1 5 5v2a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"/><path d="M12 10v12"/>',
+  'Час': '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  'Дні тижня': '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  'Місяці': '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+  'Погода': '<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="12" r="4"/>',
+  'Одяг': '<path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>',
+  'Тіло': '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  'Дім': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  'Меблі': '<path d="M20 9V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><path d="M4 16v-3a2 2 0 0 1 4 0v2h8v-2a2 2 0 0 1 4 0v3"/><path d="M4 16v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/><path d="M8 16v4"/><path d="M16 16v4"/>',
+  'Місто': '<path d="M3 21h18M9 21V9l6-6v18M9 9h6M3 21V11l6-5"/>',
+  'Транспорт': '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+  'Професії': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  'Дієслова': '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+  'Прикметники': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  'Емоції': '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
+  'Здоров\'я': '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+  'Подорожі': '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>',
+  'Напрямки': '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  'Музика': '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  'Спорт': '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  'Технології': '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+  'Природа': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
+};
 
 var CACHE_KEY = 'learny_cache_v4';
 var transCache = {};
@@ -414,22 +583,6 @@ function translate(text, from, to, callback){
       callback(null, false);
     });
   });
-}
-
-function translateBatch(words, callback){
-  var results = [];
-  var remaining = words.length;
-  if(remaining === 0){ callback([], false); return; }
-  for(var i=0;i<words.length;i++){
-    (function(idx){
-      translate(words[idx], 'en', 'uk', function(uk){
-        if(uk){ results[idx] = { en: words[idx], uk: uk }; }
-        else { results[idx] = null; }
-        remaining--;
-        if(remaining === 0){ callback(results, false); }
-      });
-    })(i);
-  }
 }
 
 function speak(text, lang){
@@ -522,8 +675,8 @@ function refreshUILabels(){
   document.getElementById('completeH1').textContent = t('complete');
   document.getElementById('completeBtn').textContent = t('cont');
   document.getElementById('dictSub').textContent = prefs.uiLang === 'uk'
-    ? 'Переклад онлайн · 🔊 = англійська · 🟠 = українська'
-    : 'Online translation · 🔊 = English · 🟠 = Ukrainian';
+    ? 'Переклад онлайн · синій = англійська · жовтий = українська'
+    : 'Online translation · blue = English · yellow = Ukrainian';
 }
 
 function showHome(){ elHome.style.display=''; elLesson.classList.remove('active'); elDict.classList.remove('active'); elComplete.classList.remove('active'); renderLessons(); }
@@ -550,9 +703,21 @@ function renderLessons(){
     var iconClass = 'lesson-icon' + (done?' done':'') + (locked?' locked':'');
     var title = prefs.uiLang === 'uk' ? theme.uk : theme.en;
     var meta = locked ? t('locked') : done ? t('completed') : '18 ' + t('questions');
-    card.innerHTML = '<div class="' + iconClass + '">' + (locked ? '🔒' : theme.icon) + '</div>' +
+    
+    // Use custom SVG for theme icon
+    var svgPath = THEME_SVGS[theme.uk] || '<circle cx="12" cy="12" r="10"/>';
+    var iconHtml = locked 
+      ? '<svg class="icon icon-lg"><use href="#i-lock"/></svg>'
+      : '<svg class="icon icon-lg">' + svgPath + '</svg>';
+
+    var arrowSvg = done 
+      ? '<svg class="icon"><use href="#i-star"/></svg>' 
+      : '<svg class="icon"><use href="#i-chevron"/></svg>';
+
+    card.innerHTML = '<div class="' + iconClass + '">' + iconHtml + '</div>' +
       '<div class="lesson-info"><h3>' + title + '</h3><p>' + meta + '</p></div>' +
-      '<div class="lesson-arrow">' + (done ? '★' : '›') + '</div>';
+      '<div class="lesson-arrow">' + arrowSvg + '</div>';
+      
     if(!locked){ (function(idx){ card.onclick = function(){ startLesson(idx); }; })(i); }
     cont.appendChild(card);
   }
@@ -570,22 +735,9 @@ function startLesson(index){
   currentLesson = THEMES[index];
   qIndex = 0; selected = null; checked = false; voiceRetries = 0;
   elHome.style.display='none'; elDict.classList.remove('active'); elComplete.classList.remove('active'); elLesson.classList.add('active');
-  var area = document.getElementById('questionArea');
-  area.innerHTML = '<div class="loading"><div class="loading-spinner"></div><div>' + t('loading') + '</div></div>';
-  document.getElementById('lessonProgress').style.width = '0%';
-  document.getElementById('mainBtn').disabled = true;
-  document.getElementById('feedback').textContent = '';
-  document.getElementById('feedback').className = 'feedback';
-
-  translateBatch(currentLesson.words, function(results){
-    var pairs = results.filter(function(r){ return r; });
-    if(pairs.length < 9){
-      area.innerHTML = '<div class="loading"><div style="font-size:48px">📡</div><div>' + t('dictError') + '</div><button class="btn" style="margin-top:16px" onclick="exitLesson()">←</button></div>';
-      return;
-    }
-    buildQuestions(pairs);
-    renderQuestion();
-  });
+  
+  buildQuestions(currentLesson.words);
+  renderQuestion();
 }
 
 function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
@@ -630,14 +782,16 @@ function renderQuestion(){
 
   if(q.type === 'voice'){
     var srow = document.createElement('div'); srow.className = 'speaker-row';
-    var spk = document.createElement('button'); spk.className = 'speaker-btn'; spk.innerHTML = '🔊';
+    var spk = document.createElement('button'); spk.className = 'speaker-btn';
+    spk.innerHTML = '<svg class="icon icon-xl"><use href="#i-speaker"/></svg>';
     spk.onclick = function(){ speak(q.speak, q.speakLang || 'en'); };
     srow.appendChild(spk); area.appendChild(srow);
     setTimeout(function(){ speak(q.speak, q.speakLang || 'en'); }, 350);
   }
   if(q.type === 'reading'){
     var prow = document.createElement('div'); prow.className = 'speaker-row';
-    var pspk = document.createElement('button'); pspk.className = 'speaker-btn'; pspk.innerHTML = '🔊';
+    var pspk = document.createElement('button'); pspk.className = 'speaker-btn';
+    pspk.innerHTML = '<svg class="icon icon-xl"><use href="#i-speaker"/></svg>';
     pspk.onclick = function(){ speak(q.phrase, 'en'); };
     prow.appendChild(pspk); area.appendChild(prow);
   }
@@ -650,11 +804,12 @@ function renderQuestion(){
     wordDiv.textContent = q.speakWord;
     mrow.appendChild(wordDiv);
     var hearBtn = document.createElement('button'); hearBtn.className = 'speaker-btn';
-    hearBtn.style.width = '74px'; hearBtn.style.height = '74px'; hearBtn.style.fontSize = '32px';
-    hearBtn.innerHTML = '🔊';
+    hearBtn.style.width = '74px'; hearBtn.style.height = '74px';
+    hearBtn.innerHTML = '<svg class="icon icon-lg"><use href="#i-speaker"/></svg>';
     hearBtn.onclick = function(){ speak(q.speakWord, 'en'); };
     mrow.appendChild(hearBtn);
-    var mic = document.createElement('button'); mic.className = 'mic-btn'; mic.id = 'micBtn'; mic.innerHTML = '🎤';
+    var mic = document.createElement('button'); mic.className = 'mic-btn'; mic.id = 'micBtn';
+    mic.innerHTML = '<svg class="icon icon-xl"><use href="#i-mic"/></svg>';
     mic.onclick = function(){ startListening(q); };
     mrow.appendChild(mic);
     var status = document.createElement('div'); status.className = 'mic-status'; status.id = 'micStatus'; status.textContent = t('tapToSpeak'); mrow.appendChild(status);
@@ -678,7 +833,7 @@ function renderQuestion(){
     area.appendChild(box);
   }
 
-  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').innerHTML = '';
   document.getElementById('feedback').className = 'feedback';
   var btn = document.getElementById('mainBtn');
   btn.textContent = t('check');
@@ -724,12 +879,12 @@ function startListening(q){
     else {
       voiceRetries++;
       if(voiceRetries >= 3){
-        status.textContent = '❌ Правильно: ' + q.speakWord;
+        status.textContent = 'Правильно: ' + q.speakWord;
         setTimeout(function(){ handleSpeakingSuccess(q, all[0] || '(—)'); }, 1200);
       } else {
         status.textContent = t('tryAgain') + ' (' + (3 - voiceRetries) + ')';
         var fb = document.getElementById('feedback');
-        fb.textContent = t('wrong');
+        fb.innerHTML = '<svg class="icon" style="color:#ef4444"><use href="#i-x-circle"/></svg> ' + t('wrong');
         fb.className = 'feedback bad';
       }
     }
@@ -741,7 +896,8 @@ function startListening(q){
 
 function handleSpeakingSuccess(q, heardText){
   var fb = document.getElementById('feedback');
-  fb.textContent = t('correct'); fb.className = 'feedback ok';
+  fb.innerHTML = '<svg class="icon" style="color:#22c55e"><use href="#i-check"/></svg> ' + t('correct');
+  fb.className = 'feedback ok';
   var btn = document.getElementById('mainBtn');
   btn.className = 'btn correct'; btn.textContent = t('cont'); btn.disabled = false;
   checked = true;
@@ -761,9 +917,13 @@ function handleMainBtn(){
     }
     var fb = document.getElementById('feedback');
     var btn = document.getElementById('mainBtn');
-    if(correct){ fb.textContent = t('correct'); fb.className = 'feedback ok'; btn.className = 'btn correct'; }
+    if(correct){ 
+      fb.innerHTML = '<svg class="icon" style="color:#22c55e"><use href="#i-check"/></svg> ' + t('correct'); 
+      fb.className = 'feedback ok'; btn.className = 'btn correct'; 
+    }
     else {
-      fb.textContent = t('wrong'); fb.className = 'feedback bad'; btn.className = 'btn wrong';
+      fb.innerHTML = '<svg class="icon" style="color:#ef4444"><use href="#i-x-circle"/></svg> ' + t('wrong'); 
+      fb.className = 'feedback bad'; btn.className = 'btn wrong';
       var qe = document.getElementById('questionText');
       if(qe){ qe.classList.add('shake'); setTimeout(function(){ qe.classList.remove('shake'); }, 500); }
     }
@@ -816,12 +976,13 @@ function lookupWord(q){
 function renderDictItem(en, uk, fromCache){
   var list = document.getElementById('dictList'); list.innerHTML = '';
   var row = document.createElement('div'); row.className = 'dict-item';
-  var spkEn = document.createElement('button'); spkEn.className = 'dict-audio en'; spkEn.textContent = '🔊';
+  var spkEn = document.createElement('button'); spkEn.className = 'dict-audio en'; 
+  spkEn.innerHTML = '<svg class="icon"><use href="#i-speaker"/></svg>';
   spkEn.onclick = function(){ speak(en, 'en'); };
-  var spkUk = document.createElement('button'); spkUk.className = 'dict-audio uk'; spkUk.textContent = '🔊';
+  var spkUk = document.createElement('button'); spkUk.className = 'dict-audio uk'; 
+  spkUk.innerHTML = '<svg class="icon"><use href="#i-speaker"/></svg>';
   spkUk.onclick = function(){ speak(uk, 'uk'); };
   var enDiv = document.createElement('div'); enDiv.className = 'dict-en'; enDiv.textContent = en;
-  if(fromCache){ var badge = document.createElement('span'); badge.className = 'dict-badge'; badge.textContent = '✓'; enDiv.appendChild(badge); }
   var ukDiv = document.createElement('div'); ukDiv.className = 'dict-uk'; ukDiv.textContent = uk;
   row.appendChild(spkEn); row.appendChild(enDiv); row.appendChild(ukDiv); row.appendChild(spkUk);
   list.appendChild(row);
@@ -834,7 +995,7 @@ document.getElementById('logoBtn').addEventListener('click', function(){
   if(devTapCount >= 5){
     devTapCount = 0;
     var answer = prompt('6?');
-    if(answer === '7'){ document.getElementById('devBtn').classList.remove('hidden'); alert('Dev tools unlocked 🔧'); }
+    if(answer === '7'){ document.getElementById('devBtn').classList.remove('hidden'); alert('Dev tools unlocked'); }
   }
 });
 
@@ -847,7 +1008,7 @@ function buildUnlockChips(){
     (function(n){
       var chip = document.createElement('button'); chip.className = 'dev-chip';
       chip.textContent = n === THEMES.length ? 'ALL' : n;
-      chip.onclick = function(){ state.completed = n; saveState(); renderLessons(); document.getElementById('devStatus').textContent = '✅ Розблоковано до ' + n; };
+      chip.onclick = function(){ state.completed = n; saveState(); renderLessons(); document.getElementById('devStatus').textContent = 'Розблоковано до ' + n; };
       cont.appendChild(chip);
     })(options[i]);
   }
@@ -858,12 +1019,12 @@ function customUnlockClick(){
   if(v > THEMES.length) v = THEMES.length;
   state.completed = v; saveState(); renderLessons();
   document.getElementById('customUnlock').value = '';
-  document.getElementById('devStatus').textContent = '✅ Розблоковано до ' + v;
+  document.getElementById('devStatus').textContent = 'Розблоковано до ' + v;
 }
 function devReset(){
   if(!confirm('Скинути весь прогрес?')) return;
   state.completed = 0; state.xp = 0; state.gems = 50; saveState(); renderLessons();
-  document.getElementById('devStatus').textContent = '🔄 Прогрес скинуто';
+  document.getElementById('devStatus').textContent = 'Прогрес скинуто';
 }
 function lockDev(){ document.getElementById('devBtn').classList.add('hidden'); closeDevPanel(); }
 
